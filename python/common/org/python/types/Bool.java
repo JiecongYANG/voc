@@ -457,7 +457,17 @@ public class Bool extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __radd__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("bool.__radd__() has not been implemented.");
+        if (other instanceof org.python.types.Bool) {
+            return org.python.types.Int.getInt((((org.python.types.Bool) other).value ? 1 : 0) + (this.value ? 1 : 0) );
+        } else if (other instanceof org.python.types.Int) {
+            return org.python.types.Int.getInt(((org.python.types.Int) other).value + (this.value ? 1 : 0));
+        } else if (other instanceof org.python.types.Float) {
+            return new org.python.types.Float(((org.python.types.Float) other).value + (this.value ? 1 : 0));
+        } else if (other instanceof org.python.types.Complex) {
+            org.python.types.Complex other_cmplx = (org.python.types.Complex) other;
+            return new org.python.types.Complex((this.value ? 1 : 0) + other_cmplx.real.value, other_cmplx.imag.value);
+        }
+        throw new org.python.exceptions.TypeError("unsupported operand type(s) for +: 'bool' and '" + other.typeName() + "'");
     }
 
     @org.python.Method(

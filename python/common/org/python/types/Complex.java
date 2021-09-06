@@ -577,7 +577,18 @@ public class Complex extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __radd__(org.python.Object other) {
-        throw new org.python.exceptions.NotImplementedError("complex.__radd__() has not been implemented.");
+        if (other instanceof org.python.types.Int || other instanceof org.python.types.Float) {
+            return new org.python.types.Complex((org.python.types.Float) this.real.__radd__(other), this.imag);
+        } else if (other instanceof Bool) {
+            if (!((org.python.types.Bool) other).value && this.real.isNegativeZero()) {
+                return new org.python.types.Complex(new org.python.types.Float(0), this.imag);
+            }
+            return new org.python.types.Complex((org.python.types.Float) this.real.__radd__(other), this.imag);
+        } else if (other instanceof Complex) {
+            org.python.types.Complex other_object = (org.python.types.Complex) other;
+            return new org.python.types.Complex((org.python.types.Float) this.real.__radd__(other_object.real), (org.python.types.Float) this.imag.__radd__(other_object.imag));
+        }
+        throw new org.python.exceptions.TypeError("unsupported operand type(s) for +: 'complex' and '" + other.typeName() + "'");
     }
 
     @org.python.Method(

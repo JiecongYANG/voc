@@ -17,4 +17,17 @@ class MathModuleTests(TranspileTestCase):
             print(factorial(y))
             print(factorial(z))
             print(factorial(w))
-        """)
+            """)
+
+    @expectedFailure
+    def test_factorial_fail(self):
+        self.assertCodeExecution("""
+            from math import factorial
+            x = -1
+            y = 0
+            z = 2.4
+            w = 'a'
+            print(factorial(x))
+            print(factorial(y))
+            print(factorial(z))
+            """)

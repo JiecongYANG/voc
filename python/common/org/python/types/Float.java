@@ -509,21 +509,7 @@ public class Float extends org.python.types.Object {
             args = {"other"}
     )
     public org.python.Object __radd__(org.python.Object other) {
-        if (other instanceof org.python.types.Int) {
-            long other_val = ((org.python.types.Int) other).value;
-            return new org.python.types.Float(((double) other_val) + this.value);
-        } else if (other instanceof org.python.types.Bool) {
-            if (((org.python.types.Bool) other).value) {
-                return new org.python.types.Float(1.0 + this.value);
-            }
-            return this;
-        } else if (other instanceof org.python.types.Float) {
-            double other_val = ((org.python.types.Float) other).value;
-            return new org.python.types.Float(other_val + this.value);
-        } else if (other instanceof org.python.types.Complex) {
-            return ((org.python.types.Complex) other).__radd__(this);
-        }
-        throw new org.python.exceptions.TypeError("unsupported operand type(s) for +: 'float' and '" + other.typeName() + "'");
+        throw new org.python.exceptions.NotImplementedError("float.__radd__() has not been implemented.");
     }
 
     @org.python.Method(

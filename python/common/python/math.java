@@ -1,4 +1,4 @@
-package org.python;
+package python;
 
 @org.python.Module(
     __doc__ = "Various math functions.\n"

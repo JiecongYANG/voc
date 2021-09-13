@@ -2,7 +2,6 @@ package org.python.stdlib.datetime;
 
 import java.util.Collections;
 
-
 public class DateTime extends org.python.types.Object {
     private final int YEAR_INDEX = 0;
     private final int MONTH_INDEX = 1;
@@ -11,7 +10,6 @@ public class DateTime extends org.python.types.Object {
     private final int MINUTE_INDEX = 4;
     private final int SECOND_INDEX = 5;
     private final int MICROSECOND_INDEX = 6;
-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
     private final int MIN_YEAR = 1;
     private final int MAX_YEAR = 999;
 

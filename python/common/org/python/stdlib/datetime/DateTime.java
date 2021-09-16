@@ -11,7 +11,7 @@ public class DateTime extends org.python.types.Object {
     private final int SECOND_INDEX = 5;
     private final int MICROSECOND_INDEX = 6;
     private final int MIN_YEAR = 1;
-    private final int MAX_YEAR = 999;
+    private final int MAX_YEAR = 9999;
 
     private Long[] timeUnits = { 0l, 0l, 0l, 0l, 0l, 0l, 0l };
 
@@ -87,7 +87,7 @@ public class DateTime extends org.python.types.Object {
 	    throw new org.python.exceptions.ValueError("second " + this.timeUnits[SECOND_INDEX] + "is out of range");
 	}
 
-	if (this.timeUnits[MICROSECOND_INDEX] < 0 || this.timeUnits[MICROSECOND_INDEX] > 100000) {
+	if (this.timeUnits[MICROSECOND_INDEX] < 0 || this.timeUnits[MICROSECOND_INDEX] > 999999) {
 	    throw new org.python.exceptions.ValueError("microsecond " + this.timeUnits[MICROSECOND_INDEX] + "is out of range");
 	}
 
@@ -212,10 +212,13 @@ public class DateTime extends org.python.types.Object {
 
     @org.python.Method(__doc__ = "")
     public org.python.Object weekday() {
-	double y = ((org.python.types.Int) this.year).value;
+	/*double y = ((org.python.types.Int) this.year).value;
 	double m = ((org.python.types.Int) this.month).value;
 	double d = ((org.python.types.Int) this.day).value;
-
+*/
+        double y = ((org.python.types.Int) this.year.__int__()).value;
+        double m = ((org.python.types.Int) this.month.__int__()).value;
+        double d = ((org.python.types.Int) this.day.__int__()).value;
 	java.util.Date myCalendar = new java.util.GregorianCalendar((int) y, (int) m - 1, (int) d).getTime();
 	java.util.Calendar c = java.util.Calendar.getInstance();
 	c.setTime(myCalendar);
@@ -223,5 +226,90 @@ public class DateTime extends org.python.types.Object {
 	int[] convertToPython = { 6, 0, 1, 2, 3, 4, 5 };
 	return org.python.types.Int.getInt(convertToPython[day - 1]);
 
+    }
+
+    @org.python.Method(__doc__ = "Return self == value.")
+    public org.python.Object __eq__(org.python.Object other) {
+        if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
+            if (y1 == y2) {
+                double m1 = ((org.python.types.Int) this.month).value;
+                double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
+                if (m1 == m2) {
+                    double d1 = ((org.python.types.Int) this.day).value;
+                    double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
+                    if (d1 == d2) {
+                        double h1 = ((org.python.types.Int) this.hour).value;
+                        double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
+                        if (h1 == h2) {
+                            double min1 = ((org.python.types.Int) this.minute).value;
+                            double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
+                            if (min1 == min2) {
+                                double s1 = ((org.python.types.Int) this.second).value;
+                                double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
+                                if (s1 == s2) {
+                                    double ms1 = ((org.python.types.Int) this.microsecond).value;
+                                    double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+                                    if (ms1 == ms2) { return org.python.types.Bool.TRUE;}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return org.python.types.Bool.FALSE;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
+    @org.python.Method(__doc__ = "Return self<=value.")
+    public org.python.Object __le__(org.python.Object other) {
+        if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
+            if (y1 < y2) {
+                return org.python.types.Bool.TRUE;
+            } else if (y1 == y2) {
+                double m1 = ((org.python.types.Int) this.month).value;
+                double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
+                if (m1 < m2) {
+                    return org.python.types.Bool.TRUE;
+                } else if (m1 == m2) {
+                    double d1 = ((org.python.types.Int) this.day).value;
+                    double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
+                    if (d1 < d2) {
+                        return org.python.types.Bool.TRUE;
+                    } else if (d1 == d2) {
+                        double h1 = ((org.python.types.Int) this.hour).value;
+                        double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
+                        if (h1 < h2) {
+                            return org.python.types.Bool.TRUE;
+                        } else if (h1 == h2) {
+                            double min1 = ((org.python.types.Int) this.minute).value;
+                            double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
+                            if (min1 < min2) {
+                                return org.python.types.Bool.TRUE;
+                            } else if (min1 == min2) {
+                                double s1 = ((org.python.types.Int) this.second).value;
+                                double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
+                                if (s1 < s2) {
+                                    return org.python.types.Bool.TRUE;
+                                } else if (s1 == s2) {
+                                    double ms1 = ((org.python.types.Int) this.microsecond).value;
+                                    double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+                                    if (ms1 <= ms2) {
+                                        return org.python.types.Bool.TRUE;
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return org.python.types.Bool.FALSE;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 }

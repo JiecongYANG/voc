@@ -227,7 +227,7 @@ public class DateTime extends org.python.types.Object {
 	return org.python.types.Int.getInt(convertToPython[day - 1]);
 
     }
-
+/*
     @org.python.Method(__doc__ = "Return self == value.")
     public org.python.Object __eq__(org.python.Object other) {
         if (other instanceof DateTime) {
@@ -309,6 +309,172 @@ public class DateTime extends org.python.types.Object {
                 }
             }
             return org.python.types.Bool.FALSE;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }*/
+    
+    @org.python.Method(__doc__ = "Return self == value.")
+    public org.python.Object __eq__(org.python.Object other) {
+        if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
+			double m1 = ((org.python.types.Int) this.month).value;
+			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
+			double d1 = ((org.python.types.Int) this.day).value;
+			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
+			double h1 = ((org.python.types.Int) this.hour).value;
+			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
+			double min1 = ((org.python.types.Int) this.minute).value;
+			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
+			double s1 = ((org.python.types.Int) this.second).value;
+			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
+			double ms1 = ((org.python.types.Int) this.microsecond).value;
+			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+
+			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
+			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
+			for(int i = 0; i<7; i++){
+				if(values[i] != values2[i]){
+					return org.python.types.Bool.FALSE;
+				}
+			}
+			return org.python.types.Bool.TRUE;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
+	 @org.python.Method(__doc__ = "Return self<=value.")
+    public org.python.Object __le__(org.python.Object other) {
+       if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
+			double m1 = ((org.python.types.Int) this.month).value;
+			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
+			double d1 = ((org.python.types.Int) this.day).value;
+			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
+			double h1 = ((org.python.types.Int) this.hour).value;
+			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
+			double min1 = ((org.python.types.Int) this.minute).value;
+			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
+			double s1 = ((org.python.types.Int) this.second).value;
+			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
+			double ms1 = ((org.python.types.Int) this.microsecond).value;
+			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+
+			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
+			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
+			double value1, value2;
+			for(int i = 0; i < 7; i++){
+				value1 = values[i];
+				value2 = values2[i];
+				if(value1 < value2){
+					return org.python.types.Bool.TRUE;
+				}
+				else if(value1 == value2){continue;}
+				else{return org.python.types.Bool.FALSE;}
+			}
+			return org.python.types.Bool.TRUE;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
+	@org.python.Method(__doc__ = "Return self<value.")
+    public org.python.Object __lt__(org.python.Object other) {
+       if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
+			double m1 = ((org.python.types.Int) this.month).value;
+			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
+			double d1 = ((org.python.types.Int) this.day).value;
+			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
+			double h1 = ((org.python.types.Int) this.hour).value;
+			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
+			double min1 = ((org.python.types.Int) this.minute).value;
+			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
+			double s1 = ((org.python.types.Int) this.second).value;
+			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
+			double ms1 = ((org.python.types.Int) this.microsecond).value;
+			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+
+			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
+			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
+			double value1, value2;
+			for(int i = 0; i < 7; i++){
+				value1 = values[i];
+				value2 = values2[i];
+				if(value1 < value2){
+					return org.python.types.Bool.TRUE;
+				}
+				else{return org.python.types.Bool.FALSE;}
+			}
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
+	@org.python.Method(__doc__ = "Return self>value.")
+    public org.python.Object __gt__(org.python.Object other) {
+       if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
+			double m1 = ((org.python.types.Int) this.month).value;
+			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
+			double d1 = ((org.python.types.Int) this.day).value;
+			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
+			double h1 = ((org.python.types.Int) this.hour).value;
+			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
+			double min1 = ((org.python.types.Int) this.minute).value;
+			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
+			double s1 = ((org.python.types.Int) this.second).value;
+			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
+			double ms1 = ((org.python.types.Int) this.microsecond).value;
+			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+
+			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
+			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
+			double value1, value2;
+			for(int i = 0; i < 7; i++){
+				value1 = values[i];
+				value2 = values2[i];
+				if(value1 > value2){
+					return org.python.types.Bool.TRUE;
+				}
+				else{return org.python.types.Bool.FALSE;}
+			}
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
+	@org.python.Method(__doc__ = "Return self>=value.")
+    public org.python.Object __ge__(org.python.Object other) {
+       if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
+			double m1 = ((org.python.types.Int) this.month).value;
+			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
+			double d1 = ((org.python.types.Int) this.day).value;
+			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
+			double h1 = ((org.python.types.Int) this.hour).value;
+			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
+			double min1 = ((org.python.types.Int) this.minute).value;
+			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
+			double s1 = ((org.python.types.Int) this.second).value;
+			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
+			double ms1 = ((org.python.types.Int) this.microsecond).value;
+			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+
+			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
+			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
+			double value1, value2;
+			for(int i = 0; i < 7; i++){
+				value1 = values[i];
+				value2 = values2[i];
+				if(value1 > value2){
+					return org.python.types.Bool.TRUE;
+				}
+				else if(value1 == value2){continue;}
+				else{return org.python.types.Bool.FALSE;}
+			}
+			return org.python.types.Bool.TRUE;
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }

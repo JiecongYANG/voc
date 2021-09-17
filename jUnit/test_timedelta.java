@@ -1,7 +1,12 @@
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
 
 public class test_timedelta {
+
+
+    // TODO: Use test-driven development to implement 
+    // - all comparison operations 
+    // - choose two operations from: difference, multiplication, division, floor division, modulo, divmod    
+    /*
     @Test
     public void testEqual() {
         assert(false);
@@ -31,4 +36,5 @@ public class test_timedelta {
     public void testGreaterThanOrEqual() {
         assert(false);
     }
+    */
 }

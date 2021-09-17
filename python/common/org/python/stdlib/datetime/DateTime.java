@@ -316,20 +316,20 @@ public class DateTime extends org.python.types.Object {
     @org.python.Method(__doc__ = "Return self == value.")
     public org.python.Object __eq__(org.python.Object other) {
         if (other instanceof DateTime) {
-            double y1 = ((org.python.types.Int) this.year).value;
-            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
-			double m1 = ((org.python.types.Int) this.month).value;
-			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
-			double d1 = ((org.python.types.Int) this.day).value;
-			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
-			double h1 = ((org.python.types.Int) this.hour).value;
-			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
-			double min1 = ((org.python.types.Int) this.minute).value;
-			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
-			double s1 = ((org.python.types.Int) this.second).value;
-			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
-			double ms1 = ((org.python.types.Int) this.microsecond).value;
-			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+            double y1 = ((org.python.types.Int) this.year.__int__()).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
+			double m1 = ((org.python.types.Int) this.month.__int__()).value;
+			double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
+			double d1 = ((org.python.types.Int) this.day.__int__()).value;
+			double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
+			double h1 = ((org.python.types.Int) this.hour.__int__()).value;
+			double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
+			double min1 = ((org.python.types.Int) this.minute.__int__()).value;
+			double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
+			double s1 = ((org.python.types.Int) this.second.__int__()).value;
+			double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
+			double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
+			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
 
 			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
 			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
@@ -346,20 +346,20 @@ public class DateTime extends org.python.types.Object {
 	 @org.python.Method(__doc__ = "Return self<=value.")
     public org.python.Object __le__(org.python.Object other) {
        if (other instanceof DateTime) {
-            double y1 = ((org.python.types.Int) this.year).value;
-            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
-			double m1 = ((org.python.types.Int) this.month).value;
-			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
-			double d1 = ((org.python.types.Int) this.day).value;
-			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
-			double h1 = ((org.python.types.Int) this.hour).value;
-			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
-			double min1 = ((org.python.types.Int) this.minute).value;
-			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
-			double s1 = ((org.python.types.Int) this.second).value;
-			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
-			double ms1 = ((org.python.types.Int) this.microsecond).value;
-			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+           double y1 = ((org.python.types.Int) this.year.__int__()).value;
+           double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
+           double m1 = ((org.python.types.Int) this.month.__int__()).value;
+           double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
+           double d1 = ((org.python.types.Int) this.day.__int__()).value;
+           double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
+           double h1 = ((org.python.types.Int) this.hour.__int__()).value;
+           double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
+           double min1 = ((org.python.types.Int) this.minute.__int__()).value;
+           double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
+           double s1 = ((org.python.types.Int) this.second.__int__()).value;
+           double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
+           double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
+           double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
 
 			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
 			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
@@ -381,20 +381,20 @@ public class DateTime extends org.python.types.Object {
 	@org.python.Method(__doc__ = "Return self<value.")
     public org.python.Object __lt__(org.python.Object other) {
        if (other instanceof DateTime) {
-            double y1 = ((org.python.types.Int) this.year).value;
-            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
-			double m1 = ((org.python.types.Int) this.month).value;
-			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
-			double d1 = ((org.python.types.Int) this.day).value;
-			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
-			double h1 = ((org.python.types.Int) this.hour).value;
-			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
-			double min1 = ((org.python.types.Int) this.minute).value;
-			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
-			double s1 = ((org.python.types.Int) this.second).value;
-			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
-			double ms1 = ((org.python.types.Int) this.microsecond).value;
-			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+           double y1 = ((org.python.types.Int) this.year.__int__()).value;
+           double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
+           double m1 = ((org.python.types.Int) this.month.__int__()).value;
+           double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
+           double d1 = ((org.python.types.Int) this.day.__int__()).value;
+           double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
+           double h1 = ((org.python.types.Int) this.hour.__int__()).value;
+           double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
+           double min1 = ((org.python.types.Int) this.minute.__int__()).value;
+           double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
+           double s1 = ((org.python.types.Int) this.second.__int__()).value;
+           double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
+           double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
+           double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
 
 			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
 			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
@@ -414,20 +414,20 @@ public class DateTime extends org.python.types.Object {
 	@org.python.Method(__doc__ = "Return self>value.")
     public org.python.Object __gt__(org.python.Object other) {
        if (other instanceof DateTime) {
-            double y1 = ((org.python.types.Int) this.year).value;
-            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
-			double m1 = ((org.python.types.Int) this.month).value;
-			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
-			double d1 = ((org.python.types.Int) this.day).value;
-			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
-			double h1 = ((org.python.types.Int) this.hour).value;
-			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
-			double min1 = ((org.python.types.Int) this.minute).value;
-			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
-			double s1 = ((org.python.types.Int) this.second).value;
-			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
-			double ms1 = ((org.python.types.Int) this.microsecond).value;
-			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+           double y1 = ((org.python.types.Int) this.year.__int__()).value;
+           double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
+           double m1 = ((org.python.types.Int) this.month.__int__()).value;
+           double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
+           double d1 = ((org.python.types.Int) this.day.__int__()).value;
+           double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
+           double h1 = ((org.python.types.Int) this.hour.__int__()).value;
+           double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
+           double min1 = ((org.python.types.Int) this.minute.__int__()).value;
+           double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
+           double s1 = ((org.python.types.Int) this.second.__int__()).value;
+           double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
+           double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
+           double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
 
 			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
 			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
@@ -447,20 +447,20 @@ public class DateTime extends org.python.types.Object {
 	@org.python.Method(__doc__ = "Return self>=value.")
     public org.python.Object __ge__(org.python.Object other) {
        if (other instanceof DateTime) {
-            double y1 = ((org.python.types.Int) this.year).value;
-            double y2 = ((org.python.types.Int) ((DateTime) other).year).value;
-			double m1 = ((org.python.types.Int) this.month).value;
-			double m2 = ((org.python.types.Int) ((DateTime) other).month).value;
-			double d1 = ((org.python.types.Int) this.day).value;
-			double d2 = ((org.python.types.Int) ((DateTime) other).day).value;
-			double h1 = ((org.python.types.Int) this.hour).value;
-			double h2 = ((org.python.types.Int) ((DateTime) other).hour).value;
-			double min1 = ((org.python.types.Int) this.minute).value;
-			double min2 = ((org.python.types.Int) ((DateTime) other).minute).value;
-			double s1 = ((org.python.types.Int) this.second).value;
-			double s2 = ((org.python.types.Int) ((DateTime) other).second).value;
-			double ms1 = ((org.python.types.Int) this.microsecond).value;
-			double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond).value;
+           double y1 = ((org.python.types.Int) this.year.__int__()).value;
+           double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
+           double m1 = ((org.python.types.Int) this.month.__int__()).value;
+           double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
+           double d1 = ((org.python.types.Int) this.day.__int__()).value;
+           double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
+           double h1 = ((org.python.types.Int) this.hour.__int__()).value;
+           double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
+           double min1 = ((org.python.types.Int) this.minute.__int__()).value;
+           double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
+           double s1 = ((org.python.types.Int) this.second.__int__()).value;
+           double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
+           double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
+           double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
 
 			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
 			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
@@ -477,5 +477,52 @@ public class DateTime extends org.python.types.Object {
 			return org.python.types.Bool.TRUE;
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
+    @org.python.Method(__doc__ = "")
+    public static org.python.Object combine(org.python.Object date, org.python.Object time) {
+        // time object not available
+        org.python.Object y, m, d, h, min, s, ms;
+        y = ((Date) date).year.__int__();
+        m = ((Date) date).month.__int__();
+        d = ((Date) date).day.__int__();
+        org.python.Object[] args = {y, m, d};
+        return new DateTime(args, Collections.emptyMap());
+    }
+
+
+    @org.python.Method(__doc__ = "")
+    public org.python.Object replace(org.python.Object year, org.python.Object month, org.python.Object day, org.python.Object hour, org.python.Object minute, org.python.Object second, org.python.Object microsecond) {
+        org.python.Object y, m, d, h, min, s, ms;
+        if (year != null)
+            y = year;
+        else y = this.year.__int__();
+
+        if (month != null)
+            m = month;
+        else m = this.month.__int__();
+
+        if (day != null)
+            d = day;
+        else d = this.day.__int__();
+
+        if (hour != null)
+            h = hour;
+        else h = this.hour.__int__();
+
+        if (minute != null)
+            min = minute;
+        else min = this.minute.__int__();
+
+        if (second != null)
+            s = second;
+        else s = this.second.__int__();
+
+        if (microsecond != null)
+            ms = microsecond;
+        else ms = this.microsecond.__int__();
+
+        org.python.Object[] args = {y, m, d, h, min, s, m};
+        return new DateTime(args, Collections.emptyMap());
     }
 }

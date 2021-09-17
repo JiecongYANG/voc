@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.python.Object;
 import org.python.exceptions.SyntaxError;
 import org.python.stdlib.datetime.DateTime;
+import org.python.stdlib.datetime.Date;
 import java.util.Collections;
 import java.util.*;
 
@@ -113,6 +114,62 @@ public class test_datetime {
         } catch (ClassCastException e) {
             assertEquals("org.python.types.Str cannot be cast to org.python.types.Int", e.getMessage());
         }
+    }
+
+    @Test
+    public void test_DateTime_eq() {
+        assertEquals(org.python.types.Bool.TRUE, datetime2.__eq__(datetime2));
+        assertEquals(org.python.types.Bool.FALSE, datetime2.__eq__(datetime1));
+
+    }
+
+    @Test
+    public void test_DateTime_le() {
+        assertEquals(org.python.types.Bool.TRUE, datetime2.__le__(datetime2));
+        assertEquals(org.python.types.Bool.FALSE, datetime2.__le__(datetime1));
+        assertEquals(org.python.types.Bool.TRUE, datetime1.__le__(datetime2));
+    }
+
+    @Test
+    public void test_DateTime_lt() {
+        assertEquals(org.python.types.Bool.FALSE, datetime2.__lt__(datetime2));
+        assertEquals(org.python.types.Bool.FALSE, datetime2.__lt__(datetime1));
+        assertEquals(org.python.types.Bool.TRUE, datetime1.__lt__(datetime2));
+    }
+
+    @Test
+    public void test_DateTime_gt() {
+        assertEquals(org.python.types.Bool.FALSE, datetime2.__gt__(datetime2));
+        assertEquals(org.python.types.Bool.TRUE, datetime2.__gt__(datetime1));
+        assertEquals(org.python.types.Bool.FALSE, datetime1.__gt__(datetime2));
+    }
+
+    @Test
+    public void test_DateTime_ge() {
+        assertEquals(org.python.types.Bool.TRUE, datetime2.__ge__(datetime2));
+        assertEquals(org.python.types.Bool.TRUE, datetime2.__ge__(datetime1));
+        assertEquals(org.python.types.Bool.FALSE, datetime1.__ge__(datetime2));
+    }
+
+    @Test
+    public void test_DateTime_comparison_invalid() {
+        org.python.types.Str invalid = new org.python.types.Str("Invalid");
+        assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, datetime2.__ge__(invalid));
+    }
+
+    @Test
+    public void test_DateTime_combine() {
+        Date date = new Date(args1,  Collections.emptyMap());
+        org.python.Object test = DateTime.combine(date, null);
+        assertEquals(new org.python.types.Str("100"), ((DateTime) test).__year__());
+        assertEquals(new org.python.types.Str("2"), ((DateTime) test).__month__());
+    }
+
+    @Test
+    public void test_DateTime_replace() {
+        org.python.Object comp = datetime2.replace(year = y, null, null, null, null, null, null);
+        assertEquals(new org.python.types.Str("100"), ((DateTime) comp).__year__());
+        assertEquals(new org.python.types.Str("2"), ((DateTime) comp).__month__());
     }
 
 }

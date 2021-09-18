@@ -298,4 +298,25 @@ public class TimeDelta extends org.python.types.Object {
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
+    @org.python.Method(__doc__ = "Return self >= value.")
+    public org.python.Object __ge__(org.python.Object other) {
+        if (other instanceof TimeDelta) {
+            if(this.__lt__(other)==org.python.types.Bool.TRUE)
+                return org.python.types.Bool.FALSE;
+            else if(this.__lt__(other)==org.python.types.Bool.FALSE)
+                return org.python.types.Bool.TRUE;
+            }
+            return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
+    @org.python.Method(__doc__ = "Return self <= value.")
+    public org.python.Object __le__(org.python.Object other) {
+        if (other instanceof TimeDelta) {
+            if(this.__gt__(other)==org.python.types.Bool.TRUE)
+                return org.python.types.Bool.FALSE;
+            else if(this.__gt__(other)==org.python.types.Bool.FALSE)
+                return org.python.types.Bool.TRUE;
+            }
+            return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
 }

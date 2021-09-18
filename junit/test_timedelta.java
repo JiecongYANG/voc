@@ -96,9 +96,23 @@ public class test_timedelta {
         assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__lt__(new org.python.types.Str("invalidInput")));
     }
 
+    @Test
+    public void test_DateTime_ge() {
+        assertEquals(org.python.types.Bool.TRUE, timedelta1.__ge__(timedelta1));
+        assertEquals(org.python.types.Bool.TRUE, timedelta1.__ge__(timedelta0));
+        assertEquals(org.python.types.Bool.FALSE, timedelta0.__ge__(timedelta1));
 
+        assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__ge__(new org.python.types.Str("invalidInput")));
+    }
 
+    @Test
+    public void test_DateTime_le() {
+        assertEquals(org.python.types.Bool.TRUE, timedelta1.__le__(timedelta1));
+        assertEquals(org.python.types.Bool.FALSE, timedelta1.__le__(timedelta0));
+        assertEquals(org.python.types.Bool.TRUE, timedelta0.__le__(timedelta1));
 
+        assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__le__(new org.python.types.Str("invalidInput")));
+    }
 
 
 

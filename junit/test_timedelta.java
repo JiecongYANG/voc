@@ -87,7 +87,14 @@ public class test_timedelta {
         assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__gt__(new org.python.types.Str("invalidInput")));
     }
 
+    @Test
+    public void test_DateTime_lt() {
+        assertEquals(org.python.types.Bool.FALSE, timedelta1.__lt__(timedelta1));
+        assertEquals(org.python.types.Bool.FALSE, timedelta1.__lt__(timedelta0));
+        assertEquals(org.python.types.Bool.TRUE, timedelta0.__lt__(timedelta1));
 
+        assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__lt__(new org.python.types.Str("invalidInput")));
+    }
 
 
 

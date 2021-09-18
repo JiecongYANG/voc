@@ -53,6 +53,15 @@ public class test_timedelta {
         assertEquals(org.python.types.Bool.TRUE, timedelta0.__eq__(timedelta0));
         assertEquals(org.python.types.Bool.FALSE, timedelta0.__eq__(timedelta1));
 
+        assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__eq__(new org.python.types.Str("invalidInput")));
+    }
+
+    @Test
+    public void test_TimeDelta_neq() {
+        assertEquals(org.python.types.Bool.FALSE, timedelta0.__neq__(timedelta0));
+        assertEquals(org.python.types.Bool.TRUE, timedelta0.__neq__(timedelta1));
+
+        assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__neq__(new org.python.types.Str("invalidInput")));
     }
 
 

@@ -233,4 +233,15 @@ public class TimeDelta extends org.python.types.Object {
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
+    @org.python.Method(__doc__ = "Return self != value.")
+    public org.python.Object __neq__(org.python.Object other) {
+        if (other instanceof TimeDelta) {
+        if(this.__eq__(other)==org.python.types.Bool.TRUE)
+            return org.python.types.Bool.FALSE;
+        else if(this.__eq__(other)==org.python.types.Bool.FALSE)
+            return org.python.types.Bool.TRUE;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
 }

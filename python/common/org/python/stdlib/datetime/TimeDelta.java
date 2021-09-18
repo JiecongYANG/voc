@@ -244,4 +244,31 @@ public class TimeDelta extends org.python.types.Object {
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
+    @org.python.Method(__doc__ = "Return self > value.")
+    public org.python.Object __gt__(org.python.Object other) {
+        if (other instanceof TimeDelta) {
+
+			double d1 = ((org.python.types.Int) this.days.__int__()).value;
+			double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
+			double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
+			double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
+			double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
+			double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
+            
+			double[] values = {d1, s1, ms1};
+			double[] values2 = {d2, s2, ms2};
+			for(int i = 0; i<3; i++){
+				if(values[i] > values2[i]){
+					return org.python.types.Bool.TRUE;
+				}
+                else if(values[i] == values2[i])
+                    continue;
+                else
+                    return org.python.types.Bool.FALSE;
+			}
+			return org.python.types.Bool.FALSE;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
 }

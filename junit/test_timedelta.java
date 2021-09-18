@@ -19,15 +19,19 @@ public class test_timedelta {
     org.python.Object[] args0 = {days0, seconds0, microseconds0};
     TimeDelta timedelta0 = new TimeDelta(args0,  Collections.emptyMap());
 
-    org.python.types.Int days = org.python.types.Int.getInt(2012);
-    org.python.types.Int seconds = org.python.types.Int.getInt(2);
-    org.python.types.Int microseconds = org.python.types.Int.getInt(14);
-    org.python.types.Int milliseconds = org.python.types.Int.getInt(16);
-    org.python.types.Int minutes = org.python.types.Int.getInt(45);
-    org.python.types.Int hours = org.python.types.Int.getInt(11);
-    org.python.types.Int weeks = org.python.types.Int.getInt(12496);
-    org.python.Object[] args1 = { days, seconds, microseconds, milliseconds, minutes, hours, weeks };
+    org.python.types.Int days1 = org.python.types.Int.getInt(200);
+    org.python.types.Int seconds1 = org.python.types.Int.getInt(4);
+    org.python.types.Int microseconds1 = org.python.types.Int.getInt(3);
+    org.python.Object[] args1 = {days1, seconds1, microseconds1};
     TimeDelta timedelta1 = new TimeDelta(args1,  Collections.emptyMap());
+
+    //org.python.types.Int days2 = org.python.types.Int.getInt(2012);
+    //org.python.types.Int seconds2 = org.python.types.Int.getInt(2);
+    //org.python.types.Int microseconds2 = org.python.types.Int.getInt(14);
+    org.python.types.Int milliseconds2 = org.python.types.Int.getInt(16);
+    org.python.types.Int minutes2 = org.python.types.Int.getInt(45);
+    org.python.types.Int hours2 = org.python.types.Int.getInt(11);
+    org.python.types.Int weeks2 = org.python.types.Int.getInt(12496);
     
 
     HashMap<String, org.python.Object> hm = new HashMap<String, org.python.Object>();
@@ -35,6 +39,16 @@ public class test_timedelta {
     @BeforeEach
     public void setUp() {
         hm.clear();
+    }
+
+    @Test
+    public void test_TimeDelta_kwargs() {
+        hm.put("milliseconds", milliseconds2);
+        hm.put("minutes", minutes2);
+        hm.put("hours", hours2);
+        hm.put("weeks", weeks2);
+        TimeDelta timedelta2 = new TimeDelta(args1,  hm);
+        assertEquals(org.python.types.Bool.FALSE, timedelta1.__eq__(timedelta2));
     }
 
     @Test
@@ -64,7 +78,14 @@ public class test_timedelta {
         assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__neq__(new org.python.types.Str("invalidInput")));
     }
 
+    @Test
+    public void test_DateTime_gt() {
+        assertEquals(org.python.types.Bool.FALSE, timedelta1.__gt__(timedelta1));
+        assertEquals(org.python.types.Bool.TRUE, timedelta1.__gt__(timedelta0));
+        assertEquals(org.python.types.Bool.FALSE, timedelta0.__gt__(timedelta1));
 
+        assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__gt__(new org.python.types.Str("invalidInput")));
+    }
 
 
 

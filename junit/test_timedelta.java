@@ -38,7 +38,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_DateTime_args() {
+    public void test_TimeDelta_args() {
         assertEquals(new org.python.types.Str("100"), timedelta0.__days__());
         assertEquals(new org.python.types.Str("2"), timedelta0.__seconds__());
         assertEquals(new org.python.types.Str("3"), timedelta0.__microseconds__());
@@ -46,6 +46,13 @@ public class test_timedelta {
         assertEquals(new org.python.types.Str("999999999 days, 23:59:59.999999"), timedelta0.__max__());
         assertEquals(new org.python.types.Str("0:00:00.000001"), timedelta0.__resolution__());
         assertEquals(new org.python.types.Str("8640002.000003"), timedelta0.total_seconds());
+    }
+
+    @Test
+    public void test_TimeDelta_eq() {
+        assertEquals(org.python.types.Bool.TRUE, timedelta0.__eq__(timedelta0));
+        assertEquals(org.python.types.Bool.FALSE, timedelta0.__eq__(timedelta1));
+
     }
 
 

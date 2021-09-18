@@ -200,4 +200,37 @@ public class TimeDelta extends org.python.types.Object {
     public static org.python.Object constant_4() {
         return org.python.types.Int.getInt(4);
     }
+
+    @org.python.Method(__doc__ = "Return self == value.")
+    public org.python.Object __eq__(org.python.Object other) {
+        if (other instanceof TimeDelta) {
+
+			double d1 = ((org.python.types.Int) this.days.__int__()).value;
+			double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
+			double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
+			double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
+			double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
+			double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
+            /*
+            double mls1 = ((org.python.types.Int) this.milliseconds.__int__()).value;
+			double mls2 = ((org.python.types.Int) ((TimeDelta) other).milliseconds.__int__()).value;
+            double m1 = ((org.python.types.Int) this.minutes.__int__()).value;
+			double m2 = ((org.python.types.Int) ((TimeDelta) other).minutes.__int__()).value;
+            double h1 = ((org.python.types.Int) this.hours.__int__()).value;
+			double h2 = ((org.python.types.Int) ((TimeDelta) other).hours.__int__()).value;
+            double w1 = ((org.python.types.Int) this.weeks.__int__()).value;
+			double w2 = ((org.python.types.Int) ((TimeDelta) other).weeks.__int__()).value;
+            */
+			double[] values = {d1, s1, ms1};
+			double[] values2 = {d2, s2, ms2};
+			for(int i = 0; i<3; i++){
+				if(values[i] != values2[i]){
+					return org.python.types.Bool.FALSE;
+				}
+			}
+			return org.python.types.Bool.TRUE;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
 }

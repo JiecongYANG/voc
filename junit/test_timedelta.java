@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.python.Object;
-import org.python.types.*;
 import org.python.stdlib.datetime.*;
 
 import java.util.Collections;
@@ -79,7 +77,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_DateTime_gt() {
+    public void test_TimeDelta_gt() {
         assertEquals(org.python.types.Bool.FALSE, timedelta1.__gt__(timedelta1));
         assertEquals(org.python.types.Bool.TRUE, timedelta1.__gt__(timedelta0));
         assertEquals(org.python.types.Bool.FALSE, timedelta0.__gt__(timedelta1));
@@ -88,7 +86,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_DateTime_lt() {
+    public void test_TimeDelta_lt() {
         assertEquals(org.python.types.Bool.FALSE, timedelta1.__lt__(timedelta1));
         assertEquals(org.python.types.Bool.FALSE, timedelta1.__lt__(timedelta0));
         assertEquals(org.python.types.Bool.TRUE, timedelta0.__lt__(timedelta1));
@@ -97,7 +95,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_DateTime_ge() {
+    public void test_TimeDelta_ge() {
         assertEquals(org.python.types.Bool.TRUE, timedelta1.__ge__(timedelta1));
         assertEquals(org.python.types.Bool.TRUE, timedelta1.__ge__(timedelta0));
         assertEquals(org.python.types.Bool.FALSE, timedelta0.__ge__(timedelta1));
@@ -106,7 +104,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_DateTime_le() {
+    public void test_TimeDelta_le() {
         assertEquals(org.python.types.Bool.TRUE, timedelta1.__le__(timedelta1));
         assertEquals(org.python.types.Bool.FALSE, timedelta1.__le__(timedelta0));
         assertEquals(org.python.types.Bool.TRUE, timedelta0.__le__(timedelta1));
@@ -114,48 +112,27 @@ public class test_timedelta {
         assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__le__(new org.python.types.Str("invalidInput")));
     }
 
-
-
-
     @Test
-    public void testInstantiation() {
-        // Test simple instantiation using the constructor of TimeDelta.
-        // See https://docs.python.org/3/library/datetime.html#datetime.timedelta
+    public void test_TimeDelta_sub() {
+        TimeDelta timeDeltaDifference = (TimeDelta)timedelta1.__sub__(timedelta0);
+        assertEquals(
+            timeDeltaDifference.__days__(),
+            new org.python.types.Str(Long.toString(days1.value - days0.value)));
+        assertEquals(
+            timeDeltaDifference.__seconds__(),
+            new org.python.types.Str(Long.toString(seconds1.value - seconds0.value)));
+        assertEquals(
+            timeDeltaDifference.__microseconds__(),
+            new org.python.types.Str(Long.toString(microseconds1.value - microseconds0.value)));
+
+        assertEquals(
+            org.python.types.NotImplementedType.NOT_IMPLEMENTED,
+            timedelta0.__sub__(new org.python.types.Str("invalidInput")));
     }
 
-
-    // TODO: Use test-driven development to implement 
-    // - all comparison operations 
-    // - choose two operations from: difference, multiplication, division, floor division, modulo, divmod    
-    /*
     @Test
-    public void testEqual() {
+    public void test_TimeDelta_mul() {
+        TimeDelta timeDeltaProduct = (TimeDelta)timedelta0.__mul__(timedelta1);
         assert(false);
     }
-
-    @Test
-    public void testNotEqual() {
-        assert(false);
-    }
-
-    @Test
-    public void testLessThan() {
-        assert(false);
-    }
-
-    @Test
-    public void testGreaterThan() {
-        assert(false);
-    }
-
-    @Test
-    public void testLessThanOrEqual() {
-        assert(false);
-    }
-
-    @Test
-    public void testGreaterThanOrEqual() {
-        assert(false);
-    }
-    */
 }

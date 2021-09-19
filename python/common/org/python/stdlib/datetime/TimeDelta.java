@@ -319,4 +319,52 @@ public class TimeDelta extends org.python.types.Object {
             }
             return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
+
+    @org.python.Method(__doc__ = "Return self > value.")
+    public org.python.Object __sub__(org.python.Object other) {
+        if (other instanceof TimeDelta) {
+			double d1 = ((org.python.types.Int) this.days.__int__()).value;
+			double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
+			double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
+			double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
+			double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
+			double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
+            
+			double[] values = {d1, s1, ms1};
+			double[] values2 = {d2, s2, ms2};
+            org.python.types.Int[] valueDifferences = new org.python.types.Int[3];
+			for(int i = 0; i<3; i++){
+                valueDifferences[i] = org.python.types.Int.getInt((int)(values[i] - values2[i]));
+			}
+
+            TimeDelta timeDeltaDifference = new TimeDelta(valueDifferences, Collections.emptyMap());
+			return timeDeltaDifference;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
+
+    @org.python.Method(__doc__ = "Return self > value.")
+    public org.python.Object __mul__(org.python.Object other) {
+        double scalar = 0.0;
+        if (other instanceof org.python.types.Float) {
+            scalar = Math.abs(((org.python.types.Float)other).value);
+        } else if (other instanceof org.python.types.Int) {
+            scalar = Math.abs(((org.python.types.Int)other).value);
+        } else {
+            return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+        } 
+
+        double d1 = ((org.python.types.Int) this.days.__int__()).value;
+        double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
+        double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
+        double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
+        double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
+        double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
+        
+        double[] values = {d1, s1, ms1};
+        double[] values2 = {d2, s2, ms2};
+        // TODO(Carl): Multiply values. But how? Handle overflow for microseconds and seconds.
+
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+    }
 }

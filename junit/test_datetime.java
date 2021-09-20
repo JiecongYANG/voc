@@ -52,9 +52,9 @@ public class test_datetime {
 
         org.python.Object[] empty = new org.python.Object[0];
 
-        DateTime datetime1 = new DateTime(empty, hm);
-        assertEquals(new org.python.types.Str("2012"), datetime1.__year__());
-        assertEquals(new org.python.types.Str("2012-02-14 16:45:11.012496"), datetime1.__str__());
+        DateTime datetime3 = new DateTime(empty, hm);
+        assertEquals(new org.python.types.Str("2012"), datetime3.__year__());
+        assertEquals(new org.python.types.Str("2012-02-14 16:45:11.012496"), datetime3.__str__());
     }
 
     @Test
@@ -88,8 +88,8 @@ public class test_datetime {
 
     @Test
     public void test_DateTime_date() {
-        org.python.Object datetime4 = DateTime.today();
-        assertEquals(new org.python.types.Str("2021"), ((DateTime) datetime4).year);
+        org.python.Object datetime3 = DateTime.today();
+        assertEquals(new org.python.types.Str("2021"), ((DateTime) datetime3).year);
     }
 
     @Test
@@ -109,7 +109,7 @@ public class test_datetime {
         hm.put("second", second);
         hm.put("microsecond", microsecond);
         org.python.Object[] empty = new org.python.Object[0];
-        DateTime datetime5 = new DateTime(empty,  hm);
+        DateTime datetime3 = new DateTime(empty,  hm);
         fail("Exception not thrown");
         } catch (ClassCastException e) {
             assertEquals("org.python.types.Str cannot be cast to org.python.types.Int", e.getMessage());

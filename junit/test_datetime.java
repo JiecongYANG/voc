@@ -167,7 +167,7 @@ public class test_datetime {
 
     @Test
     public void test_DateTime_replace() {
-        org.python.Object comp = datetime2.replace(year = y, null, null, null, null, null, null);
+        org.python.Object comp = datetime2.replace(y, null, null, null, null, null, null);
         assertEquals(new org.python.types.Str("100"), ((DateTime) comp).__year__());
         assertEquals(new org.python.types.Str("2"), ((DateTime) comp).__month__());
     }

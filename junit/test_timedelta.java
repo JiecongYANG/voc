@@ -116,14 +116,14 @@ public class test_timedelta {
     public void test_TimeDelta_sub() {
         TimeDelta timeDeltaDifference = (TimeDelta)timedelta1.__sub__(timedelta0);
         assertEquals(
-            timeDeltaDifference.__days__(),
-            new org.python.types.Str(Long.toString(days1.value - days0.value)));
+            new org.python.types.Str(Long.toString(days1.value - days0.value)),
+            timeDeltaDifference.__days__());
         assertEquals(
-            timeDeltaDifference.__seconds__(),
-            new org.python.types.Str(Long.toString(seconds1.value - seconds0.value)));
+            new org.python.types.Str(Long.toString(seconds1.value - seconds0.value)),
+            timeDeltaDifference.__seconds__());
         assertEquals(
-            timeDeltaDifference.__microseconds__(),
-            new org.python.types.Str(Long.toString(microseconds1.value - microseconds0.value)));
+            new org.python.types.Str(Long.toString(microseconds1.value - microseconds0.value)),
+            timeDeltaDifference.__microseconds__());
 
         assertEquals(
             org.python.types.NotImplementedType.NOT_IMPLEMENTED,
@@ -131,8 +131,48 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_mul() {
-        TimeDelta timeDeltaProduct = (TimeDelta)timedelta0.__mul__(timedelta1);
-        assert(false);
+    public void test_TimeDelta_mul_scalarGreaterThan1() {
+        org.python.Object scalar = new org.python.types.Float(400000.0);
+        TimeDelta timeDeltaProduct = (TimeDelta)timedelta0.__mul__(scalar);
+        
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)(9 + 100 * 400000.0))),
+            timeDeltaProduct.__days__());
+        assertEquals(
+            new org.python.types.Str(Long.toString(22400 + 1)),
+            timeDeltaProduct.__seconds__());
+        assertEquals(
+            new org.python.types.Str(Long.toString(200000)),
+            timeDeltaProduct.__microseconds__());
+    }
+
+    @Test
+    public void test_TimeDelta_mul_scalarLessThan1() {
+        org.python.Object scalar = new org.python.types.Float(0.2);
+        TimeDelta timeDeltaProduct = (TimeDelta)timedelta0.__mul__(scalar);
+        
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)Math.round(100 * 0.2))),
+            timeDeltaProduct.__days__());
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)Math.round(2 * 0.2))),
+            timeDeltaProduct.__seconds__());
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)Math.round(3 * 0.2 + 2 * 0.2 * 1000000))),
+            timeDeltaProduct.__microseconds__());
+
+        org.python.Object scalar2 = new org.python.types.Float(0.75);
+        TimeDelta timeDeltaProduct2 = (TimeDelta)timedelta0.__mul__(scalar2);
+        
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)Math.round(100 * 0.75))),
+            timeDeltaProduct2.__days__());
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)Math.round(2 * 0.75))),
+            timeDeltaProduct2.__seconds__());
+        assertEquals(
+            // Microseconds borrow 0.5 seconds.
+            new org.python.types.Str(Long.toString((long)Math.round(3 * 0.75 + 0.5 * 1000000))),
+            timeDeltaProduct2.__microseconds__());
     }
 }

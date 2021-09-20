@@ -352,19 +352,65 @@ public class TimeDelta extends org.python.types.Object {
             scalar = Math.abs(((org.python.types.Int)other).value);
         } else {
             return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
-        } 
+        }
 
-        double d1 = ((org.python.types.Int) this.days.__int__()).value;
-        double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
-        double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
-        double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
-        double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
-        double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
+        if (scalar < 0.0) {
+            return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+        }
+
+        double d = ((org.python.types.Int) this.days.__int__()).value;
+        double s = ((org.python.types.Int) this.seconds.__int__()).value;
+        double ms = ((org.python.types.Int) this.microseconds.__int__()).value;
         
-        double[] values = {d1, s1, ms1};
-        double[] values2 = {d2, s2, ms2};
-        // TODO(Carl): Multiply values. But how? Handle overflow for microseconds and seconds.
+        // Multiply values with scalar.
+        // And handle overflow for microseconds and seconds.
 
-        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+        if (scalar < 1) {
+            d *= scalar;
+            double borrowSeconds = 0.0; 
+            if (d != Math.round(d)) {
+                double decimal = d - Math.floor(d);
+                borrowSeconds += decimal * 24 * 3600;
+                d = Math.round(d);
+            }
+
+            s *= scalar;
+            s += borrowSeconds;
+            double borrowMicroseconds = 0.0;
+            if (s != Math.round(s)) {
+                double decimal = s - Math.floor(s);
+                borrowMicroseconds += decimal * 1000000;
+                s = Math.round(s);
+            }
+
+            ms *= scalar;
+            ms += borrowMicroseconds;
+        } else {
+            ms *= scalar;
+            double carrySeconds = 0.0;
+            while (ms >= 1000000) {
+                ms -= 1000000;
+                carrySeconds += 1;
+            }
+
+            s *= scalar;
+            s += carrySeconds;
+            double carryDays = 0.0;
+            while (s >= 24 * 3600) {
+                s -= 24 * 3600;
+                carryDays += 1;
+            }
+
+            d *= scalar;
+            d += carryDays;
+        }
+
+        org.python.Object[] values = {
+            org.python.types.Int.getInt(Math.round(d)),
+            org.python.types.Int.getInt(Math.round(s)),
+            org.python.types.Int.getInt(Math.round(ms)),
+        };
+        TimeDelta timeDelta = new TimeDelta(values, Collections.emptyMap());
+        return timeDelta;
     }
 }

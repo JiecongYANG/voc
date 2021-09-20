@@ -1,10 +1,11 @@
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import org.python.exceptions.*;
 import org.python.stdlib.datetime.*;
 
 import java.util.Collections;
@@ -47,6 +48,39 @@ public class test_timedelta {
         hm.put("weeks", weeks2);
         TimeDelta timedelta2 = new TimeDelta(args1,  hm);
         assertEquals(org.python.types.Bool.FALSE, timedelta1.__eq__(timedelta2));
+    }
+
+    @Test
+    public void test_TimeDelta_args_invalid() {
+        try
+        {
+            org.python.Object[] args1 = {days1, days1, days1, seconds1, seconds1, seconds1, microseconds1,microseconds1, microseconds1,microseconds1};
+            TimeDelta timedelta2 = new TimeDelta(args1, Collections.emptyMap());
+        }
+        catch (TypeError e)
+        {
+            assertEquals("__new__() takes at most 7 arguments (10 given)", e.getMessage());
+        }
+        
+
+    }
+
+    @Test
+    public void test_TimeDelta_args_invalid_2() {
+        try
+        {
+            hm.put("millisecondsxxx", milliseconds2);
+            hm.put("minutes", minutes2);
+            hm.put("hours", hours2);
+            hm.put("weeks", weeks2);
+            TimeDelta timedelta2 = new TimeDelta(args1,  hm);
+        }
+        catch (TypeError e)
+        {
+            assertEquals("millisecondsxxx is an invalid keuword argument for this function", e.getMessage());
+        }
+        
+
     }
 
     @Test

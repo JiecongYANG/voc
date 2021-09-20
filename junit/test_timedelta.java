@@ -1,10 +1,11 @@
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import org.python.exceptions.*;
 import org.python.stdlib.datetime.*;
 
 import java.util.Collections;
@@ -39,6 +40,8 @@ public class test_timedelta {
         hm.clear();
     }
 
+    
+
     @Test
     public void test_TimeDelta_kwargs() {
         hm.put("milliseconds", milliseconds2);
@@ -50,6 +53,86 @@ public class test_timedelta {
     }
 
     @Test
+    public void test_TimeDelta_args_different_length() {
+        org.python.types.Int days0 = org.python.types.Int.getInt(100);
+        org.python.types.Int seconds0 = org.python.types.Int.getInt(2);
+        org.python.types.Int microseconds0 = org.python.types.Int.getInt(3);
+        org.python.Object[] args0 = {days0, seconds0, microseconds0};
+        TimeDelta timedelta0 = new TimeDelta(args0,  Collections.emptyMap());
+
+        org.python.Object[] args1 = {days0, seconds0};
+        org.python.Object[] args2 = {days0};
+        TimeDelta timedelta1 = new TimeDelta(args1,  Collections.emptyMap());
+        TimeDelta timedelta2 = new TimeDelta(args2,  Collections.emptyMap());
+
+    }
+
+    @Test
+    public void test_TimeDelta_args_invalid_2() {
+        try
+        {
+            hm.put("millisecondsxxx", milliseconds2);
+            hm.put("minutes", minutes2);
+            hm.put("hours", hours2);
+            hm.put("weeks", weeks2);
+            TimeDelta timedelta2 = new TimeDelta(args1,  hm);
+        }
+        catch (TypeError e)
+        {
+            assertEquals("millisecondsxxx is an invalid keuword argument for this function", e.getMessage());
+        }
+        try
+        {
+            org.python.Object[] args1 = {days1, days1, days1, seconds1, seconds1, seconds1, microseconds1,microseconds1, microseconds1,microseconds1};
+            TimeDelta timedelta2 = new TimeDelta(args1, Collections.emptyMap());
+        }
+        catch (TypeError e)
+        {
+            assertEquals("__new__() takes at most 7 arguments (10 given)", e.getMessage());
+        }
+    }
+
+    @Test
+    public void test_TimeDelta_args_invalid_3() {
+        try
+        {
+            hm.put("days", days1);
+            hm.put("seconds", seconds1);
+            hm.put("microseconds", microseconds1);
+            TimeDelta timedelta2 = new TimeDelta(args1,  hm);
+        }
+        catch (TypeError e)
+        {
+            assertEquals("Argument given by name ('days') and position (1)", e.getMessage());
+        }
+
+        try
+        {
+            hm.clear();
+            hm.put("seconds", seconds1);
+            hm.put("microseconds", microseconds1);
+            TimeDelta timedelta2 = new TimeDelta(args1,  hm);
+        }
+        catch (TypeError e)
+        {
+            assertEquals("Argument given by name ('seconds') and position (2)", e.getMessage());
+        }
+
+        try
+        {
+            hm.clear();
+            hm.put("microseconds", microseconds1);
+            TimeDelta timedelta2 = new TimeDelta(args1,  hm);
+        }
+        catch (TypeError e)
+        {
+            assertEquals("Argument given by name ('microseconds') and position (3)", e.getMessage());
+        }
+        
+
+    }
+
+    @Test
     public void test_TimeDelta_args() {
         assertEquals(new org.python.types.Str("100"), timedelta0.__days__());
         assertEquals(new org.python.types.Str("2"), timedelta0.__seconds__());
@@ -57,7 +140,46 @@ public class test_timedelta {
         assertEquals(new org.python.types.Str("-999999999 days, 0:00:00"), timedelta0.__min__());
         assertEquals(new org.python.types.Str("999999999 days, 23:59:59.999999"), timedelta0.__max__());
         assertEquals(new org.python.types.Str("0:00:00.000001"), timedelta0.__resolution__());
+    }
+    @Test
+    public void test_TimeDelta_total_seconds() {
+        org.python.types.Int days0 = org.python.types.Int.getInt(100);
+        org.python.types.Int seconds0 = org.python.types.Int.getInt(2);
+        org.python.types.Int microseconds0 = org.python.types.Int.getInt(3);
+        org.python.Object[] args0 = {days0, seconds0, microseconds0};
+        TimeDelta timedelta0 = new TimeDelta(args0,  Collections.emptyMap());
         assertEquals(new org.python.types.Str("8640002.000003"), timedelta0.total_seconds());
+
+        org.python.types.Int microseconds01 = org.python.types.Int.getInt(30);
+        org.python.Object[] args01 = {days0, seconds0, microseconds01};
+        TimeDelta timedelta01 = new TimeDelta(args01,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.000030"), timedelta01.total_seconds());
+
+        org.python.types.Int microseconds02 = org.python.types.Int.getInt(300);
+        org.python.Object[] args02 = {days0, seconds0, microseconds02};
+        TimeDelta timedelta02 = new TimeDelta(args02,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.000300"), timedelta02.total_seconds());
+
+        org.python.types.Int microseconds03 = org.python.types.Int.getInt(3000);
+        org.python.Object[] args03 = {days0, seconds0, microseconds03};
+        TimeDelta timedelta03 = new TimeDelta(args03,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.003000"), timedelta03.total_seconds());
+
+        org.python.types.Int microseconds04 = org.python.types.Int.getInt(30000);
+        org.python.Object[] args04 = {days0, seconds0, microseconds04};
+        TimeDelta timedelta04 = new TimeDelta(args04,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.030000"), timedelta04.total_seconds());
+
+        org.python.types.Int microseconds05 = org.python.types.Int.getInt(300000);
+        org.python.Object[] args05 = {days0, seconds0, microseconds05};
+        TimeDelta timedelta05 = new TimeDelta(args05,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.300000"), timedelta05.total_seconds());
+
+        org.python.types.Int microseconds06 = org.python.types.Int.getInt(0);
+        org.python.Object[] args06 = {days0, seconds0, microseconds06};
+        TimeDelta timedelta06 = new TimeDelta(args06,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.0"), timedelta06.total_seconds());
+
     }
 
     @Test

@@ -30,13 +30,13 @@ public class DateTest {
     // Testing if today's date works
     @Test
     public void testToday() {
-        Date today = (Date) Date.today();
-        java.util.Date javaToday = new java.util.Date();
+        Date dateToday = (Date) Date.today();
+        java.util.Date javaUtilToday = new java.util.Date();
         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("Europe/Stockholm"));
-        calendar.setTime(javaToday);
-        assertEquals(today.year, Int.getInt(calendar.get(Calendar.YEAR)));
-        assertEquals(today.month, Int.getInt(calendar.get(Calendar.MONTH) + 1));
-        assertEquals(today.day, Int.getInt(calendar.get(Calendar.DAY_OF_MONTH)));
+        calendar.setTime(javaUtilToday);
+        assertEquals(dateToday.year, Int.getInt(calendar.get(Calendar.YEAR)));
+        assertEquals(dateToday.month, Int.getInt(calendar.get(Calendar.MONTH) + 1));
+        assertEquals(dateToday.day, Int.getInt(calendar.get(Calendar.DAY_OF_MONTH)));
     }
 
     // Testing week of the day, date.weekday is day of the week as a number with m
@@ -52,16 +52,27 @@ public class DateTest {
 
         assertEquals(date.weekday(), Int.getInt(1));
     }
+    // Test of Isoweekday, Return the day of the week as an integer, where Monday is 1 and Sunday is 7.
+    @Test
+    public void testIsoWeekday() {
+        org.python.Object[] args = {
+            Int.getInt(2021),
+            Int.getInt(9),
+            Int.getInt(21),
+        };
+        Date date = new Date(args, Collections.EMPTY_MAP);
 
+        assertEquals(date.isoweekday(), Int.getInt(2));
+    }
     @Test
     public void testCTime() {
         org.python.Object[] args = {
-            Int.getInt(2012), ///year
-            Int.getInt(12), // month
-            Int.getInt(21), // day
+            Int.getInt(2012),
+            Int.getInt(12),
+            Int.getInt(21),
         };
-        Date d = new Date(args, Collections.EMPTY_MAP);
-        assertEquals(d.ctime(), new Str("Fri Dec  21 00:00:00 2012"));
+        Date date = new Date(args, Collections.EMPTY_MAP);
+        assertEquals(date.ctime(), new Str("Fri Dec  21 00:00:00 2012"));
     }
 
 

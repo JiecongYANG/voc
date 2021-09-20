@@ -264,4 +264,14 @@ public class Date extends org.python.types.Object {
 	return org.python.types.Int.getInt(convertToPython[day - 1]);
 
     }
+
+    @org.python.Method(__doc__ = "Week of the day an an integer")
+    public org.python.Object isoweekday() {
+        org.python.types.Int day = (org.python.types.Int) weekday();
+        org.python.types.Int isoDay = org.python.types.Int.getInt(day.value + 1);
+        return isoDay;
+    }
+
+
+
 }

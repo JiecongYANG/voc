@@ -40,6 +40,8 @@ public class test_timedelta {
         hm.clear();
     }
 
+    
+
     @Test
     public void test_TimeDelta_kwargs() {
         hm.put("milliseconds", milliseconds2);
@@ -51,17 +53,17 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_args_invalid() {
-        try
-        {
-            org.python.Object[] args1 = {days1, days1, days1, seconds1, seconds1, seconds1, microseconds1,microseconds1, microseconds1,microseconds1};
-            TimeDelta timedelta2 = new TimeDelta(args1, Collections.emptyMap());
-        }
-        catch (TypeError e)
-        {
-            assertEquals("__new__() takes at most 7 arguments (10 given)", e.getMessage());
-        }
-        
+    public void test_TimeDelta_args_different_length() {
+        org.python.types.Int days0 = org.python.types.Int.getInt(100);
+        org.python.types.Int seconds0 = org.python.types.Int.getInt(2);
+        org.python.types.Int microseconds0 = org.python.types.Int.getInt(3);
+        org.python.Object[] args0 = {days0, seconds0, microseconds0};
+        TimeDelta timedelta0 = new TimeDelta(args0,  Collections.emptyMap());
+
+        org.python.Object[] args1 = {days0, seconds0};
+        org.python.Object[] args2 = {days0};
+        TimeDelta timedelta1 = new TimeDelta(args1,  Collections.emptyMap());
+        TimeDelta timedelta2 = new TimeDelta(args2,  Collections.emptyMap());
 
     }
 
@@ -78,6 +80,46 @@ public class test_timedelta {
         catch (TypeError e)
         {
             assertEquals("millisecondsxxx is an invalid keuword argument for this function", e.getMessage());
+        }
+        
+
+    }
+
+    @Test
+    public void test_TimeDelta_args_invalid_3() {
+        try
+        {
+            hm.put("days", days1);
+            hm.put("seconds", seconds1);
+            hm.put("microseconds", microseconds1);
+            TimeDelta timedelta2 = new TimeDelta(args1,  hm);
+        }
+        catch (TypeError e)
+        {
+            assertEquals("Argument given by name ('days') and position (1)", e.getMessage());
+        }
+
+        try
+        {
+            hm.clear();
+            hm.put("seconds", seconds1);
+            hm.put("microseconds", microseconds1);
+            TimeDelta timedelta2 = new TimeDelta(args1,  hm);
+        }
+        catch (TypeError e)
+        {
+            assertEquals("Argument given by name ('seconds') and position (2)", e.getMessage());
+        }
+
+        try
+        {
+            hm.clear();
+            hm.put("microseconds", microseconds1);
+            TimeDelta timedelta2 = new TimeDelta(args1,  hm);
+        }
+        catch (TypeError e)
+        {
+            assertEquals("Argument given by name ('microseconds') and position (3)", e.getMessage());
         }
         
 

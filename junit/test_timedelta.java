@@ -81,8 +81,15 @@ public class test_timedelta {
         {
             assertEquals("millisecondsxxx is an invalid keuword argument for this function", e.getMessage());
         }
-        
-
+        try
+        {
+            org.python.Object[] args1 = {days1, days1, days1, seconds1, seconds1, seconds1, microseconds1,microseconds1, microseconds1,microseconds1};
+            TimeDelta timedelta2 = new TimeDelta(args1, Collections.emptyMap());
+        }
+        catch (TypeError e)
+        {
+            assertEquals("__new__() takes at most 7 arguments (10 given)", e.getMessage());
+        }
     }
 
     @Test

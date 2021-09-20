@@ -34,7 +34,7 @@ public class TimeDelta extends org.python.types.Object {
             throw new org.python.exceptions.TypeError("__new__() takes at most 7 arguments (" + args.length + " given)");
         }
 
-        String[] allowed = { "days", "seconds", "microseconds", "milliseconds", "minutes", "hours", "weeks" };
+        String[] allowed = {"days", "seconds", "microseconds", "milliseconds", "minutes", "hours", "weeks"};
         List<String> allowedList = Arrays.asList(allowed);
         if (!kwargs.isEmpty()) {
             boolean correct = true;
@@ -173,7 +173,7 @@ public class TimeDelta extends org.python.types.Object {
         long sumDays = thisDays + otherDays;
         long sumSeconds = thisSeconds + otherSeconds;
         long sumMicroseconds = thisMicroseconds + otherMicroSeconds;
-        org.python.Object[] args = { org.python.types.Int.getInt(sumDays), org.python.types.Int.getInt(sumSeconds), org.python.types.Int.getInt(sumMicroseconds) };
+        org.python.Object[] args = {org.python.types.Int.getInt(sumDays), org.python.types.Int.getInt(sumSeconds), org.python.types.Int.getInt(sumMicroseconds)};
         TimeDelta TD = new TimeDelta(args, Collections.EMPTY_MAP);
         return TD;
     }
@@ -182,7 +182,7 @@ public class TimeDelta extends org.python.types.Object {
         long otherSeconds = ((org.python.types.Int) this.seconds).value;
         long otherMicroSeconds = ((org.python.types.Int) this.microseconds).value;
         long otherDays = ((org.python.types.Int) this.days).value;
-        org.python.Object[] args = { org.python.types.Int.getInt(otherDays), org.python.types.Int.getInt(otherSeconds), org.python.types.Int.getInt(otherMicroSeconds) };
+        org.python.Object[] args = {org.python.types.Int.getInt(otherDays), org.python.types.Int.getInt(otherSeconds), org.python.types.Int.getInt(otherMicroSeconds)};
         TimeDelta TD = new TimeDelta(args, Collections.EMPTY_MAP);
         return TD;
     }
@@ -204,31 +204,30 @@ public class TimeDelta extends org.python.types.Object {
     @org.python.Method(__doc__ = "Return self == value.")
     public org.python.Object __eq__(org.python.Object other) {
         if (other instanceof TimeDelta) {
-
-			double d1 = ((org.python.types.Int) this.days.__int__()).value;
-			double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
-			double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
-			double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
-			double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
-			double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
+            double d1 = ((org.python.types.Int) this.days.__int__()).value;
+            double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
+            double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
+            double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
+            double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
+            double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
             /*
             double mls1 = ((org.python.types.Int) this.milliseconds.__int__()).value;
-			double mls2 = ((org.python.types.Int) ((TimeDelta) other).milliseconds.__int__()).value;
+            double mls2 = ((org.python.types.Int) ((TimeDelta) other).milliseconds.__int__()).value;
             double m1 = ((org.python.types.Int) this.minutes.__int__()).value;
-			double m2 = ((org.python.types.Int) ((TimeDelta) other).minutes.__int__()).value;
+            double m2 = ((org.python.types.Int) ((TimeDelta) other).minutes.__int__()).value;
             double h1 = ((org.python.types.Int) this.hours.__int__()).value;
-			double h2 = ((org.python.types.Int) ((TimeDelta) other).hours.__int__()).value;
+            double h2 = ((org.python.types.Int) ((TimeDelta) other).hours.__int__()).value;
             double w1 = ((org.python.types.Int) this.weeks.__int__()).value;
-			double w2 = ((org.python.types.Int) ((TimeDelta) other).weeks.__int__()).value;
+            double w2 = ((org.python.types.Int) ((TimeDelta) other).weeks.__int__()).value;
             */
-			double[] values = {d1, s1, ms1};
-			double[] values2 = {d2, s2, ms2};
-			for(int i = 0; i<3; i++){
-				if(values[i] != values2[i]){
-					return org.python.types.Bool.FALSE;
-				}
-			}
-			return org.python.types.Bool.TRUE;
+            double[] values = {d1, s1, ms1};
+            double[] values2 = {d2, s2, ms2};
+            for (int i = 0; i < 3; i++) {
+                if (values[i] != values2[i]) {
+                    return org.python.types.Bool.FALSE;
+                }
+            }
+            return org.python.types.Bool.TRUE;
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
@@ -236,10 +235,11 @@ public class TimeDelta extends org.python.types.Object {
     @org.python.Method(__doc__ = "Return self != value.")
     public org.python.Object __neq__(org.python.Object other) {
         if (other instanceof TimeDelta) {
-        if(this.__eq__(other)==org.python.types.Bool.TRUE)
-            return org.python.types.Bool.FALSE;
-        else if(this.__eq__(other)==org.python.types.Bool.FALSE)
-            return org.python.types.Bool.TRUE;
+            if (this.__eq__(other) == org.python.types.Bool.TRUE) {
+                return org.python.types.Bool.FALSE;
+            } else if (this.__eq__(other) == org.python.types.Bool.FALSE) {
+                return org.python.types.Bool.TRUE;
+            }
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
@@ -247,26 +247,25 @@ public class TimeDelta extends org.python.types.Object {
     @org.python.Method(__doc__ = "Return self > value.")
     public org.python.Object __gt__(org.python.Object other) {
         if (other instanceof TimeDelta) {
+            double d1 = ((org.python.types.Int) this.days.__int__()).value;
+            double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
+            double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
+            double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
+            double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
+            double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
 
-			double d1 = ((org.python.types.Int) this.days.__int__()).value;
-			double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
-			double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
-			double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
-			double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
-			double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
-            
-			double[] values = {d1, s1, ms1};
-			double[] values2 = {d2, s2, ms2};
-			for(int i = 0; i<3; i++){
-				if(values[i] > values2[i]){
-					return org.python.types.Bool.TRUE;
-				}
-                else if(values[i] == values2[i])
+            double[] values = {d1, s1, ms1};
+            double[] values2 = {d2, s2, ms2};
+            for (int i = 0; i < 3; i++) {
+                if (values[i] > values2[i]) {
+                    return org.python.types.Bool.TRUE;
+                } else if (values[i] == values2[i]) {
                     continue;
-                else
+                } else {
                     return org.python.types.Bool.FALSE;
-			}
-			return org.python.types.Bool.FALSE;
+                }
+            }
+            return org.python.types.Bool.FALSE;
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
@@ -274,26 +273,25 @@ public class TimeDelta extends org.python.types.Object {
     @org.python.Method(__doc__ = "Return self < value.")
     public org.python.Object __lt__(org.python.Object other) {
         if (other instanceof TimeDelta) {
+            double d1 = ((org.python.types.Int) this.days.__int__()).value;
+            double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
+            double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
+            double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
+            double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
+            double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
 
-			double d1 = ((org.python.types.Int) this.days.__int__()).value;
-			double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
-			double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
-			double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
-			double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
-			double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
-            
-			double[] values = {d1, s1, ms1};
-			double[] values2 = {d2, s2, ms2};
-			for(int i = 0; i<3; i++){
-				if(values[i] < values2[i]){
-					return org.python.types.Bool.TRUE;
-				}
-                else if(values[i] == values2[i])
+            double[] values = {d1, s1, ms1};
+            double[] values2 = {d2, s2, ms2};
+            for (int i = 0; i < 3; i++) {
+                if (values[i] < values2[i]) {
+                    return org.python.types.Bool.TRUE;
+                } else if (values[i] == values2[i]) {
                     continue;
-                else
+                } else {
                     return org.python.types.Bool.FALSE;
-			}
-			return org.python.types.Bool.FALSE;
+                }
+            }
+            return org.python.types.Bool.FALSE;
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
@@ -301,44 +299,46 @@ public class TimeDelta extends org.python.types.Object {
     @org.python.Method(__doc__ = "Return self >= value.")
     public org.python.Object __ge__(org.python.Object other) {
         if (other instanceof TimeDelta) {
-            if(this.__lt__(other)==org.python.types.Bool.TRUE)
+            if (this.__lt__(other) == org.python.types.Bool.TRUE) {
                 return org.python.types.Bool.FALSE;
-            else if(this.__lt__(other)==org.python.types.Bool.FALSE)
+            } else if (this.__lt__(other) == org.python.types.Bool.FALSE) {
                 return org.python.types.Bool.TRUE;
             }
-            return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(__doc__ = "Return self <= value.")
     public org.python.Object __le__(org.python.Object other) {
         if (other instanceof TimeDelta) {
-            if(this.__gt__(other)==org.python.types.Bool.TRUE)
+            if (this.__gt__(other) == org.python.types.Bool.TRUE) {
                 return org.python.types.Bool.FALSE;
-            else if(this.__gt__(other)==org.python.types.Bool.FALSE)
+            } else if (this.__gt__(other) == org.python.types.Bool.FALSE) {
                 return org.python.types.Bool.TRUE;
             }
-            return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+        }
+        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
     @org.python.Method(__doc__ = "Return self - value.")
     public org.python.Object __sub__(org.python.Object other) {
         if (other instanceof TimeDelta) {
-			double d1 = ((org.python.types.Int) this.days.__int__()).value;
-			double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
-			double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
-			double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
-			double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
-			double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
-            
-			double[] values = {d1, s1, ms1};
-			double[] values2 = {d2, s2, ms2};
+            double d1 = ((org.python.types.Int) this.days.__int__()).value;
+            double d2 = ((org.python.types.Int) ((TimeDelta) other).days.__int__()).value;
+            double s1 = ((org.python.types.Int) this.seconds.__int__()).value;
+            double s2 = ((org.python.types.Int) ((TimeDelta) other).seconds.__int__()).value;
+            double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
+            double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
+
+            double[] values = {d1, s1, ms1};
+            double[] values2 = {d2, s2, ms2};
             org.python.types.Int[] valueDifferences = new org.python.types.Int[3];
-			for(int i = 0; i<3; i++){
-                valueDifferences[i] = org.python.types.Int.getInt((int)(values[i] - values2[i]));
-			}
+            for (int i = 0; i < 3; i++) {
+                valueDifferences[i] = org.python.types.Int.getInt((int) (values[i] - values2[i]));
+            }
 
             TimeDelta timeDeltaDifference = new TimeDelta(valueDifferences, Collections.emptyMap());
-			return timeDeltaDifference;
+            return timeDeltaDifference;
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
@@ -347,9 +347,9 @@ public class TimeDelta extends org.python.types.Object {
     public org.python.Object __mul__(org.python.Object other) {
         double scalar = 0.0;
         if (other instanceof org.python.types.Float) {
-            scalar = ((org.python.types.Float)other).value;
+            scalar = ((org.python.types.Float) other).value;
         } else if (other instanceof org.python.types.Int) {
-            scalar = ((org.python.types.Int)other).value;
+            scalar = ((org.python.types.Int) other).value;
         } else {
             return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
         }
@@ -361,13 +361,13 @@ public class TimeDelta extends org.python.types.Object {
         double d = ((org.python.types.Int) this.days.__int__()).value;
         double s = ((org.python.types.Int) this.seconds.__int__()).value;
         double ms = ((org.python.types.Int) this.microseconds.__int__()).value;
-        
+
         // Multiply values with scalar.
         // And handle overflow for microseconds and seconds.
 
         if (scalar < 1) {
             d *= scalar;
-            double borrowSeconds = 0.0; 
+            double borrowSeconds = 0.0;
             if (d != Math.floor(d)) {
                 double decimal = d - Math.floor(d);
                 borrowSeconds += decimal * 24 * 3600;

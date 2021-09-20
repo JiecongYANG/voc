@@ -375,4 +375,9 @@ public class test_timedelta {
             org.python.types.NotImplementedType.NOT_IMPLEMENTED,
             timedelta0.__mul__(new org.python.types.Float(-1.0)));
     }
+
+    @Test
+    public void test_TimeDelta_constant_4() {
+        assertEquals(org.python.types.Int.getInt(4),TimeDelta.constant_4());
+    }
 }

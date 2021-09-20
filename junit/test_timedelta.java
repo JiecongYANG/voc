@@ -140,7 +140,46 @@ public class test_timedelta {
         assertEquals(new org.python.types.Str("-999999999 days, 0:00:00"), timedelta0.__min__());
         assertEquals(new org.python.types.Str("999999999 days, 23:59:59.999999"), timedelta0.__max__());
         assertEquals(new org.python.types.Str("0:00:00.000001"), timedelta0.__resolution__());
+    }
+    @Test
+    public void test_TimeDelta_total_seconds() {
+        org.python.types.Int days0 = org.python.types.Int.getInt(100);
+        org.python.types.Int seconds0 = org.python.types.Int.getInt(2);
+        org.python.types.Int microseconds0 = org.python.types.Int.getInt(3);
+        org.python.Object[] args0 = {days0, seconds0, microseconds0};
+        TimeDelta timedelta0 = new TimeDelta(args0,  Collections.emptyMap());
         assertEquals(new org.python.types.Str("8640002.000003"), timedelta0.total_seconds());
+
+        org.python.types.Int microseconds01 = org.python.types.Int.getInt(30);
+        org.python.Object[] args01 = {days0, seconds0, microseconds01};
+        TimeDelta timedelta01 = new TimeDelta(args01,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.000030"), timedelta01.total_seconds());
+
+        org.python.types.Int microseconds02 = org.python.types.Int.getInt(300);
+        org.python.Object[] args02 = {days0, seconds0, microseconds02};
+        TimeDelta timedelta02 = new TimeDelta(args02,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.000300"), timedelta02.total_seconds());
+
+        org.python.types.Int microseconds03 = org.python.types.Int.getInt(3000);
+        org.python.Object[] args03 = {days0, seconds0, microseconds03};
+        TimeDelta timedelta03 = new TimeDelta(args03,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.003000"), timedelta03.total_seconds());
+
+        org.python.types.Int microseconds04 = org.python.types.Int.getInt(30000);
+        org.python.Object[] args04 = {days0, seconds0, microseconds04};
+        TimeDelta timedelta04 = new TimeDelta(args04,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.030000"), timedelta04.total_seconds());
+
+        org.python.types.Int microseconds05 = org.python.types.Int.getInt(300000);
+        org.python.Object[] args05 = {days0, seconds0, microseconds05};
+        TimeDelta timedelta05 = new TimeDelta(args05,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.300000"), timedelta05.total_seconds());
+
+        org.python.types.Int microseconds06 = org.python.types.Int.getInt(0);
+        org.python.Object[] args06 = {days0, seconds0, microseconds06};
+        TimeDelta timedelta06 = new TimeDelta(args06,  Collections.emptyMap());
+        assertEquals(new org.python.types.Str("8640002.0"), timedelta06.total_seconds());
+
     }
 
     @Test

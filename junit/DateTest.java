@@ -17,9 +17,9 @@ public class DateTest {
     @Test
     public void testCreateDate() {
         org.python.Object[] args = {
-            Int.getInt(2021), // year
-            Int.getInt(12), // month
-            Int.getInt(21), // day
+            Int.getInt(2021),
+            Int.getInt(12),
+            Int.getInt(21),
         };
         Date date = new Date(args, Collections.EMPTY_MAP);
         assertEquals(date.year, args[0]);
@@ -121,4 +121,43 @@ public class DateTest {
         assertTrue(date.lessthanOrEq(date1).toBoolean());
 
     }
+
+    @Test(expected = TypeError.class)
+    public void testTooFewArguments() {
+        org.python.Object[] args = {
+            Int.getInt(2012),
+            Int.getInt(12),
+        };
+        new Date(args, Collections.EMPTY_MAP);
+    }
+
+    @Test(expected = ValueError.class)
+    public void testInvalidValue() {
+        org.python.Object[] args = {
+            Int.getInt(2012),
+            Int.getInt(100),
+            Int.getInt(21),
+        };
+       new Date(args, Collections.EMPTY_MAP);
+    }
+
+    @Test
+    public void testKwargs() {
+        Map<java.lang.String, org.python.Object> kwargs = new HashMap();
+        org.python.Object[] args = {};
+
+        kwargs.put("year", Int.getInt(2012));
+        kwargs.put("month", Int.getInt(12));
+        kwargs.put("day", Int.getInt(21));
+
+        Date date = new Date(args, kwargs);
+        org.python.types.Int year = (Int) kwargs.get("year");
+        org.python.types.Int month = (Int) kwargs.get("month");
+        org.python.types.Int day = (Int) kwargs.get("day");
+
+        assertEquals(date.year, year);
+        assertEquals(date.month, month);
+        assertEquals(date.day, day);
+    }
+
 }

@@ -273,6 +273,7 @@ public class Date extends org.python.types.Object {
         org.python.types.Int isoDay = org.python.types.Int.getInt(day.value + 1);
         return isoDay;
     }
+
     @org.python.Method(__doc__ = "Return a date corresponding to a date_string given in the format YYYY-MM-DD")
     public static Date fromisoformat(org.python.types.Str date) {
 
@@ -283,6 +284,68 @@ public class Date extends org.python.types.Object {
 
         return new Date(dateObj, Collections.emptyMap());
     }
+    @org.python.Method(__doc__ = "Checks if dates are equal")
+    public org.python.types.Object eq(Date date) {
+        return org.python.types.Bool.getBool(this.compare(date) == org.python.types.Int.getInt((0)));
+    }
 
+    @org.python.Method(__doc__ = "Checks if this date is greater than another date")
+    public org.python.types.Object greaterthan(Date date) {
+        return org.python.types.Bool.getBool(this.compare(date) == org.python.types.Int.getInt((1)));
+    }
+
+    @org.python.Method(__doc__ = "Checks if this date is less than another date")
+    public org.python.types.Object lessthan(Date date) {
+        return org.python.types.Bool.getBool(this.compare(date) == org.python.types.Int.getInt((-1)));
+    }
+
+    @org.python.Method(__doc__ = "Checks if this date is greater or equal than another date")
+    public org.python.types.Object greateroreq(Date date) {
+        return org.python.types.Bool.getBool(this.compare(date).value >= org.python.types.Int.getInt((0)).value);
+    }
+
+    @org.python.Method(__doc__ = "Checks if this date is less than or equal than another date")
+    public org.python.types.Object lessthanOrEq(Date date) {
+        return org.python.types.Bool.getBool(this.compare(date).value <= org.python.types.Int.getInt((0)).value);
+
+    }
+    @org.python.Method(__doc__ = "")
+    public org.python.types.Int compare(Date date2) {
+        double date1Year = ((org.python.types.Int) this.year).value;
+        double date2Year = ((org.python.types.Int) date2.year).value;
+
+        double date1Month = ((org.python.types.Int) this.month).value;
+        double date2Month = ((org.python.types.Int) date2.month).value;
+
+        double date1Day = ((org.python.types.Int) this.day).value;
+        double date2Day= ((org.python.types.Int) date2.day).value;
+
+        if (date1Year > date2Year) {
+            return org.python.types.Int.getInt(1);
+        }
+        else if (date1Year < date2Year) {
+            return org.python.types.Int.getInt(-1);
+        }
+        else {
+            if (date1Month > date2Month) {
+                return org.python.types.Int.getInt(1);
+            }
+            else if (date1Month < date2Month) {
+                return org.python.types.Int.getInt(-1);
+            }
+            else {
+                if (date1Day > date2Day) {
+                    return org.python.types.Int.getInt(1);
+                }
+                else if (date1Day < date2Day) {
+                    return org.python.types.Int.getInt(-1);
+                }
+                else {
+                    return org.python.types.Int.getInt(0);
+
+                }
+            }
+        }
+    }
 
 }

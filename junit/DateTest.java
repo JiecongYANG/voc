@@ -92,4 +92,33 @@ public class DateTest {
         assertNotEquals(date3.month, Int.getInt(10));
         assertNotEquals(date3.day, Int.getInt(29));
     }
+    @Test()
+    public void testCompare() {
+
+        org.python.Object[] args = {
+            Int.getInt(2012),
+            Int.getInt(12),
+            Int.getInt(21),
+        };
+        Date date = new Date(args, Collections.EMPTY_MAP);
+        assertTrue(date.eq(date).toBoolean());
+        assertFalse(date.greaterthan(date).toBoolean());
+        assertFalse(date.lessthan(date).toBoolean());
+        assertTrue(date.greateroreq(date).toBoolean());
+        assertTrue(date.lessthanOrEq(date).toBoolean());
+
+        org.python.Object[] args1 = {
+            Int.getInt(2021),
+            Int.getInt(9),
+            Int.getInt(20),
+        };
+        Date date1 = new Date(args1, Collections.EMPTY_MAP);
+
+        assertFalse(date.eq(date1).toBoolean());
+        assertFalse(date.greaterthan(date1).toBoolean());
+        assertTrue(date.lessthan(date1).toBoolean());
+        assertFalse(date.greateroreq(date1).toBoolean());
+        assertTrue(date.lessthanOrEq(date1).toBoolean());
+
+    }
 }

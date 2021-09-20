@@ -75,5 +75,21 @@ public class DateTest {
         assertEquals(date.ctime(), new Str("Fri Dec  21 00:00:00 2012"));
     }
 
+    @Test
+    public void testFromIsoFormat() {
+        Date date1 = Date.fromisoformat(new Str("2012-12-21"));
+        assertEquals(date1.year, Int.getInt(2012));
+        assertEquals(date1.month, Int.getInt(12));
+        assertEquals(date1.day, Int.getInt(21));
 
+        Date date2 = Date.fromisoformat(new Str("1996-04-28"));
+        assertEquals(date2.year, Int.getInt(1996));
+        assertEquals(date2.month, Int.getInt(04));
+        assertEquals(date2.day, Int.getInt(28));
+
+        Date date3 = Date.fromisoformat(new Str("2021-09-20"));
+        assertNotEquals(date3.year, Int.getInt(2022));
+        assertNotEquals(date3.month, Int.getInt(10));
+        assertNotEquals(date3.day, Int.getInt(29));
+    }
 }

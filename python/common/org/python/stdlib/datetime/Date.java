@@ -1,5 +1,7 @@
 package org.python.stdlib.datetime;
 
+import org.python.Object;
+
 import java.util.Collections;
 
 public class Date extends org.python.types.Object {
@@ -271,7 +273,16 @@ public class Date extends org.python.types.Object {
         org.python.types.Int isoDay = org.python.types.Int.getInt(day.value + 1);
         return isoDay;
     }
+    @org.python.Method(__doc__ = "Return a date corresponding to a date_string given in the format YYYY-MM-DD")
+    public static Date fromisoformat(org.python.types.Str date) {
 
+        String[] dateSplits = date.value.split("-");
+
+        org.python.Object[] dateObj = { org.python.types.Int.getInt(Integer.parseInt(dateSplits[0])),
+            org.python.types.Int.getInt(Integer.parseInt(dateSplits[1])), org.python.types.Int.getInt(Integer.parseInt(dateSplits[2])) };
+
+        return new Date(dateObj, Collections.emptyMap());
+    }
 
 
 }

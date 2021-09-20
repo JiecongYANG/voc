@@ -111,6 +111,44 @@ public class test_timedelta {
 
         assertEquals(org.python.types.NotImplementedType.NOT_IMPLEMENTED, timedelta0.__le__(new org.python.types.Str("invalidInput")));
     }
+    
+    @Test
+    public void test_TimeDelta_pos() {
+        TimeDelta timeDeltaPos = (TimeDelta)timedelta0.__pos__();
+
+        assertEquals(timedelta0.__days__(), timeDeltaPos.__days__());
+        assertEquals(timedelta0.__seconds__(), timeDeltaPos.__seconds__());
+        assertEquals(timedelta0.__microseconds__(), timeDeltaPos.__microseconds__());
+    }
+
+    @Test
+    public void test_TimeDelta_str() {
+        org.python.types.Str days = timedelta0.__days__();
+        org.python.types.Str seconds = timedelta0.__seconds__();
+        org.python.types.Str microseconds = timedelta0.__microseconds__();
+        String timeDeltaStr = days + " days, " + "seconds: " + seconds + ", microseconds: " + microseconds;
+        
+        assertEquals(new org.python.types.Str(timeDeltaStr), timedelta0.__str__());
+    }
+
+    @Test
+    public void test_TimeDelta_add() {
+        TimeDelta timeDeltaSum = (TimeDelta)timedelta0.__add__(timedelta1);
+
+        assertEquals(
+            new org.python.types.Str(Long.toString(100 + 200)),
+            timeDeltaSum.__days__());
+        assertEquals(
+            new org.python.types.Str(Long.toString(2 + 4)),
+            timeDeltaSum.__seconds__());
+        assertEquals(
+            new org.python.types.Str(Long.toString(3 + 3)),
+            timeDeltaSum.__microseconds__());
+
+        assertThrows(ClassCastException.class, () -> {
+            timedelta0.__add__(new org.python.types.Str("invalidInput"));
+        });
+    }
 
     @Test
     public void test_TimeDelta_sub() {
@@ -152,10 +190,10 @@ public class test_timedelta {
         TimeDelta timeDeltaProduct = (TimeDelta)timedelta0.__mul__(scalar);
         
         assertEquals(
-            new org.python.types.Str(Long.toString((long)Math.round(100 * 0.2))),
+            new org.python.types.Str(Long.toString((long)Math.floor(100 * 0.2))),
             timeDeltaProduct.__days__());
         assertEquals(
-            new org.python.types.Str(Long.toString((long)Math.round(2 * 0.2))),
+            new org.python.types.Str(Long.toString((long)Math.floor(2 * 0.2))),
             timeDeltaProduct.__seconds__());
         assertEquals(
             new org.python.types.Str(Long.toString((long)Math.round(3 * 0.2 + 2 * 0.2 * 1000000))),
@@ -165,14 +203,54 @@ public class test_timedelta {
         TimeDelta timeDeltaProduct2 = (TimeDelta)timedelta0.__mul__(scalar2);
         
         assertEquals(
-            new org.python.types.Str(Long.toString((long)Math.round(100 * 0.75))),
+            new org.python.types.Str(Long.toString((long)Math.floor(100 * 0.75))),
             timeDeltaProduct2.__days__());
         assertEquals(
-            new org.python.types.Str(Long.toString((long)Math.round(2 * 0.75))),
+            new org.python.types.Str(Long.toString((long)Math.floor(2 * 0.75))),
             timeDeltaProduct2.__seconds__());
         assertEquals(
             // Microseconds borrow 0.5 seconds.
             new org.python.types.Str(Long.toString((long)Math.round(3 * 0.75 + 0.5 * 1000000))),
             timeDeltaProduct2.__microseconds__());
+
+        org.python.Object scalar3 = new org.python.types.Float(0.135);
+        TimeDelta timeDeltaProduct3 = (TimeDelta)timedelta0.__mul__(scalar3);
+        
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)Math.floor(100 * 0.135))),
+            timeDeltaProduct3.__days__());
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)Math.floor(2 * 0.135 + 0.005 * 100 * 24 * 3600))),
+            timeDeltaProduct3.__seconds__());
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)Math.round(3 * 0.135 + 2 * 0.135 * 1000000))),
+            timeDeltaProduct3.__microseconds__());
+    }
+
+    @Test
+    public void test_TimeDelta_mul_intScalar() {
+        org.python.Object scalar = org.python.types.Int.getInt(400000);
+        TimeDelta timeDeltaProduct = (TimeDelta)timedelta0.__mul__(scalar);
+        
+        assertEquals(
+            new org.python.types.Str(Long.toString((long)(9 + 100 * 400000))),
+            timeDeltaProduct.__days__());
+        assertEquals(
+            new org.python.types.Str(Long.toString(22400 + 1)),
+            timeDeltaProduct.__seconds__());
+        assertEquals(
+            new org.python.types.Str(Long.toString(200000)),
+            timeDeltaProduct.__microseconds__());
+    }
+
+    @Test
+    public void test_TimeDelta_mul_invalidScalar() {
+        assertEquals(
+            org.python.types.NotImplementedType.NOT_IMPLEMENTED,
+            timedelta0.__mul__(new org.python.types.Str("invalid")));
+
+        assertEquals(
+            org.python.types.NotImplementedType.NOT_IMPLEMENTED,
+            timedelta0.__mul__(new org.python.types.Float(-1.0)));
     }
 }

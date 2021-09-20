@@ -320,7 +320,7 @@ public class TimeDelta extends org.python.types.Object {
             return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
-    @org.python.Method(__doc__ = "Return self > value.")
+    @org.python.Method(__doc__ = "Return self - value.")
     public org.python.Object __sub__(org.python.Object other) {
         if (other instanceof TimeDelta) {
 			double d1 = ((org.python.types.Int) this.days.__int__()).value;
@@ -343,13 +343,13 @@ public class TimeDelta extends org.python.types.Object {
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
-    @org.python.Method(__doc__ = "Return self > value.")
+    @org.python.Method(__doc__ = "Return self * value.")
     public org.python.Object __mul__(org.python.Object other) {
         double scalar = 0.0;
         if (other instanceof org.python.types.Float) {
-            scalar = Math.abs(((org.python.types.Float)other).value);
+            scalar = ((org.python.types.Float)other).value;
         } else if (other instanceof org.python.types.Int) {
-            scalar = Math.abs(((org.python.types.Int)other).value);
+            scalar = ((org.python.types.Int)other).value;
         } else {
             return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
         }
@@ -368,19 +368,19 @@ public class TimeDelta extends org.python.types.Object {
         if (scalar < 1) {
             d *= scalar;
             double borrowSeconds = 0.0; 
-            if (d != Math.round(d)) {
+            if (d != Math.floor(d)) {
                 double decimal = d - Math.floor(d);
                 borrowSeconds += decimal * 24 * 3600;
-                d = Math.round(d);
+                d = Math.floor(d);
             }
 
             s *= scalar;
             s += borrowSeconds;
             double borrowMicroseconds = 0.0;
-            if (s != Math.round(s)) {
+            if (s != Math.floor(s)) {
                 double decimal = s - Math.floor(s);
                 borrowMicroseconds += decimal * 1000000;
-                s = Math.round(s);
+                s = Math.floor(s);
             }
 
             ms *= scalar;

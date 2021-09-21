@@ -220,6 +220,7 @@ public class TimeDelta extends org.python.types.Object {
             double w1 = ((org.python.types.Int) this.weeks.__int__()).value;
             double w2 = ((org.python.types.Int) ((TimeDelta) other).weeks.__int__()).value;
             */
+            // Compare each of the values that they are equal.
             double[] values = {d1, s1, ms1};
             double[] values2 = {d2, s2, ms2};
             for (int i = 0; i < 3; i++) {
@@ -254,6 +255,7 @@ public class TimeDelta extends org.python.types.Object {
             double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
             double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
 
+            // Compare each of the values that they are greater than the other values.
             double[] values = {d1, s1, ms1};
             double[] values2 = {d2, s2, ms2};
             for (int i = 0; i < 3; i++) {
@@ -280,12 +282,14 @@ public class TimeDelta extends org.python.types.Object {
             double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
             double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
 
+            // Compare each of the values that they are less than the other values.
             double[] values = {d1, s1, ms1};
             double[] values2 = {d2, s2, ms2};
             for (int i = 0; i < 3; i++) {
                 if (values[i] < values2[i]) {
                     return org.python.types.Bool.TRUE;
                 } else if (values[i] == values2[i]) {
+                    // Move to the next value, since it may still be less than the other value.
                     continue;
                 } else {
                     return org.python.types.Bool.FALSE;
@@ -330,6 +334,7 @@ public class TimeDelta extends org.python.types.Object {
             double ms1 = ((org.python.types.Int) this.microseconds.__int__()).value;
             double ms2 = ((org.python.types.Int) ((TimeDelta) other).microseconds.__int__()).value;
 
+            // Calculate the difference between each of the values.
             double[] values = {d1, s1, ms1};
             double[] values2 = {d2, s2, ms2};
             org.python.types.Int[] valueDifferences = new org.python.types.Int[3];
@@ -362,13 +367,14 @@ public class TimeDelta extends org.python.types.Object {
         double s = ((org.python.types.Int) this.seconds.__int__()).value;
         double ms = ((org.python.types.Int) this.microseconds.__int__()).value;
 
-        // Multiply values with scalar.
-        // And handle overflow for microseconds and seconds.
-
+        // Multiply values with the scalar.
+        // The case when scalar < 1 needs to be handled differently than when scalar >= 1.
         if (scalar < 1) {
             d *= scalar;
             double borrowSeconds = 0.0;
             if (d != Math.floor(d)) {
+                // If the days contains a decimal after multiplying with the scalar,
+                // we need to convert the decimal to seconds.
                 double decimal = d - Math.floor(d);
                 borrowSeconds += decimal * 24 * 3600;
                 d = Math.floor(d);
@@ -378,6 +384,8 @@ public class TimeDelta extends org.python.types.Object {
             s += borrowSeconds;
             double borrowMicroseconds = 0.0;
             if (s != Math.floor(s)) {
+                // If the seconds contains a decimal after multiplying with the scalar,
+                // we need to convert the decimal to microseconds.
                 double decimal = s - Math.floor(s);
                 borrowMicroseconds += decimal * 1000000;
                 s = Math.floor(s);
@@ -389,6 +397,8 @@ public class TimeDelta extends org.python.types.Object {
             ms *= scalar;
             double carrySeconds = 0.0;
             while (ms >= 1000000) {
+                // While the microseconds contains more than a second of time,
+                // we move microseconds over to the seconds.
                 ms -= 1000000;
                 carrySeconds += 1;
             }
@@ -397,6 +407,8 @@ public class TimeDelta extends org.python.types.Object {
             s += carrySeconds;
             double carryDays = 0.0;
             while (s >= 24 * 3600) {
+                // While the seconds contains more than a day of time,
+                // we move seconds over to the days.
                 s -= 24 * 3600;
                 carryDays += 1;
             }

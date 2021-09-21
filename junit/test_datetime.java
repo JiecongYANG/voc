@@ -111,8 +111,8 @@ public class test_datetime {
         org.python.Object[] empty = new org.python.Object[0];
         DateTime datetime3 = new DateTime(empty,  hm);
         fail("Exception not thrown");
-        } catch (ClassCastException e) {
-            assertEquals("org.python.types.Str cannot be cast to org.python.types.Int", e.getMessage());
+        } catch (Exception e) {
+            assertTrue(e instanceof ClassCastException);
         }
     }
 

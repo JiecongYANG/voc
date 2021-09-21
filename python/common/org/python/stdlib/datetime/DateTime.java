@@ -258,7 +258,37 @@ public class DateTime extends org.python.types.Object {
             }
             return org.python.types.Bool.TRUE;
         }
-        return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
+        return org.python.types.Bool.FALSE;
+    }
+
+    @org.python.Method(__doc__ = "Return self != value.")
+    public org.python.Object __neq__(org.python.Object other) {
+        if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year.__int__()).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
+            double m1 = ((org.python.types.Int) this.month.__int__()).value;
+            double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
+            double d1 = ((org.python.types.Int) this.day.__int__()).value;
+            double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
+            double h1 = ((org.python.types.Int) this.hour.__int__()).value;
+            double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
+            double min1 = ((org.python.types.Int) this.minute.__int__()).value;
+            double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
+            double s1 = ((org.python.types.Int) this.second.__int__()).value;
+            double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
+            double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
+            double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
+
+            double[] values = {y1, m1, d1, h1, min1, s1, ms1};
+            double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
+            for (int i = 0; i < 7; i++) {
+                if (values[i] != values2[i]) {
+                    return org.python.types.Bool.TRUE;
+                }
+            }
+            return org.python.types.Bool.FALSE;
+        }
+        return org.python.types.Bool.TRUE;
     }
 
     @org.python.Method(__doc__ = "Return self<=value.")

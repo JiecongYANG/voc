@@ -123,6 +123,14 @@ public class test_datetime {
     }
 
     @Test
+    public void test_DateTime_neq() {
+        assertEquals(org.python.types.Bool.FALSE, datetime2.__neq__(datetime2));
+        assertEquals(org.python.types.Bool.TRUE, datetime2.__neq__(datetime1));
+        org.python.types.Str invalid = new org.python.types.Str("Invalid");
+        assertEquals(org.python.types.Bool.TRUE, datetime2.__neq__(invalid));
+    }
+
+    @Test
     public void test_DateTime_le() {
         assertEquals(org.python.types.Bool.TRUE, datetime2.__le__(datetime2));
         assertEquals(org.python.types.Bool.FALSE, datetime2.__le__(datetime1));

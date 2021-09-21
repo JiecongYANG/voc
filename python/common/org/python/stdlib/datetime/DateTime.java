@@ -13,7 +13,7 @@ public class DateTime extends org.python.types.Object {
     private final int MIN_YEAR = 1;
     private final int MAX_YEAR = 9999;
 
-    private Long[] timeUnits = {0L, 0L, 0L, 0L, 0L, 0L, 0L };
+    private Long[] timeUnits = {0L, 0L, 0L, 0L, 0L, 0L, 0L};
 
     @org.python.Attribute
     public final org.python.Object year;
@@ -43,8 +43,8 @@ public class DateTime extends org.python.types.Object {
     public static final org.python.Object max = __max__();
 
     public DateTime(org.python.Object[] args, java.util.Map<java.lang.String, org.python.Object> kwargs) {
-    super();
-        String[] keys = {"year", "month", "day", "hour", "minute", "second", "microsecond" };
+        super();
+        String[] keys = {"year", "month", "day", "hour", "minute", "second", "microsecond"};
         boolean kwargsIsUsed = false;
         int keyIndex = 0;
         int argIndex = 0;
@@ -146,7 +146,7 @@ public class DateTime extends org.python.types.Object {
     @org.python.Method(__doc__ = "")
     public org.python.Object date() {
         org.python.Object[] args = {org.python.types.Int.getInt(this.timeUnits[YEAR_INDEX]), org.python.types.Int.getInt(this.timeUnits[MONTH_INDEX]),
-        org.python.types.Int.getInt(this.timeUnits[DAY_INDEX]) };
+            org.python.types.Int.getInt(this.timeUnits[DAY_INDEX])};
         return new Date(args, Collections.emptyMap());
     }
 
@@ -155,57 +155,57 @@ public class DateTime extends org.python.types.Object {
         java.time.LocalDateTime today = java.time.LocalDateTime.now();
         org.python.Object[] args = {org.python.types.Int.getInt(today.getYear()), org.python.types.Int.getInt(today.getMonth().getValue()),
             org.python.types.Int.getInt(today.getDayOfMonth()), org.python.types.Int.getInt(today.getHour()), org.python.types.Int.getInt(today.getMinute()),
-            org.python.types.Int.getInt(today.getSecond()), org.python.types.Int.getInt(today.getNano() / 1000) };
+            org.python.types.Int.getInt(today.getSecond()), org.python.types.Int.getInt(today.getNano() / 1000)};
         return new DateTime(args, Collections.emptyMap());
     }
 
     @org.python.Method(__doc__ = "returns year")
-        public org.python.types.Str __year__() {
+    public org.python.types.Str __year__() {
         return new org.python.types.Str(this.timeUnits[YEAR_INDEX] + "");
     }
 
     @org.python.Method(__doc__ = "returns month")
-        public org.python.types.Str __month__() {
+    public org.python.types.Str __month__() {
         return new org.python.types.Str(this.timeUnits[MONTH_INDEX] + "");
     }
 
     @org.python.Method(__doc__ = "returns day")
-        public org.python.types.Str __day__() {
+    public org.python.types.Str __day__() {
         return new org.python.types.Str(this.timeUnits[DAY_INDEX] + "");
     }
 
     @org.python.Method(__doc__ = "returns hour")
-        public org.python.types.Str __hour__() {
+    public org.python.types.Str __hour__() {
         return new org.python.types.Str(this.timeUnits[HOUR_INDEX] + "");
     }
 
     @org.python.Method(__doc__ = "returns minute")
-        public org.python.types.Str __minute__() {
+    public org.python.types.Str __minute__() {
         return new org.python.types.Str(this.timeUnits[MINUTE_INDEX] + "");
     }
 
     @org.python.Method(__doc__ = "returns second")
-        public org.python.types.Str __second__() {
+    public org.python.types.Str __second__() {
         return new org.python.types.Str(this.timeUnits[SECOND_INDEX] + "");
     }
 
     @org.python.Method(__doc__ = "returns microsecond")
-        public org.python.types.Str __microsecond__() {
+    public org.python.types.Str __microsecond__() {
         return new org.python.types.Str(this.timeUnits[MICROSECOND_INDEX] + "");
     }
 
     @org.python.Method(__doc__ = "")
-        private static org.python.Object __min__() {
+    private static org.python.Object __min__() {
         org.python.types.Int year = org.python.types.Int.getInt(1);
         org.python.types.Int month = org.python.types.Int.getInt(1);
         org.python.types.Int day = org.python.types.Int.getInt(1);
 
-        org.python.Object[] args = {year, month, day };
+        org.python.Object[] args = {year, month, day};
         return new DateTime(args, Collections.emptyMap());
     }
 
     @org.python.Method(__doc__ = "")
-        private static org.python.Object __max__() {
+    private static org.python.Object __max__() {
         org.python.types.Int year = org.python.types.Int.getInt(9999);
         org.python.types.Int month = org.python.types.Int.getInt(12);
         org.python.types.Int day = org.python.types.Int.getInt(31);
@@ -214,7 +214,7 @@ public class DateTime extends org.python.types.Object {
         org.python.types.Int second = org.python.types.Int.getInt(59);
         org.python.types.Int microsecond = org.python.types.Int.getInt(999999);
 
-        org.python.Object[] args = {year, month, day, hour, minute, second, microsecond };
+        org.python.Object[] args = {year, month, day, hour, minute, second, microsecond};
         return new DateTime(args, Collections.emptyMap());
     }
 
@@ -227,7 +227,7 @@ public class DateTime extends org.python.types.Object {
         java.util.Calendar c = java.util.Calendar.getInstance();
         c.setTime(myCalendar);
         int day = c.get(java.util.Calendar.DAY_OF_WEEK);
-        int[] convertToPython = {6, 0, 1, 2, 3, 4, 5 };
+        int[] convertToPython = {6, 0, 1, 2, 3, 4, 5};
         return org.python.types.Int.getInt(convertToPython[day - 1]);
     }
 
@@ -317,86 +317,88 @@ public class DateTime extends org.python.types.Object {
             double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
 
             double[] values = {y1, m1, d1, h1, min1, s1, ms1};
-			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
-			double value1, value2;
-			for (int i = 0; i < 7; i++) {
-				value1 = values[i];
-				value2 = values2[i];
-				if (value1 < value2) {
-					return org.python.types.Bool.TRUE;
-				}
-				else {
+            double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
+            double value1, value2;
+            for (int i = 0; i < 7; i++) {
+                value1 = values[i];
+                value2 = values2[i];
+                if (value1 < value2) {
+                    return org.python.types.Bool.TRUE;
+                } else {
                     return org.python.types.Bool.FALSE;
                 }
-			}
+            }
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
-	@org.python.Method(__doc__ = "Return self>value.")
+    @org.python.Method(__doc__ = "Return self>value.")
     public org.python.Object __gt__(org.python.Object other) {
-       if (other instanceof DateTime) {
-           double y1 = ((org.python.types.Int) this.year.__int__()).value;
-           double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
-           double m1 = ((org.python.types.Int) this.month.__int__()).value;
-           double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
-           double d1 = ((org.python.types.Int) this.day.__int__()).value;
-           double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
-           double h1 = ((org.python.types.Int) this.hour.__int__()).value;
-           double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
-           double min1 = ((org.python.types.Int) this.minute.__int__()).value;
-           double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
-           double s1 = ((org.python.types.Int) this.second.__int__()).value;
-           double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
-           double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
-           double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
+        if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year.__int__()).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
+            double m1 = ((org.python.types.Int) this.month.__int__()).value;
+            double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
+            double d1 = ((org.python.types.Int) this.day.__int__()).value;
+            double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
+            double h1 = ((org.python.types.Int) this.hour.__int__()).value;
+            double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
+            double min1 = ((org.python.types.Int) this.minute.__int__()).value;
+            double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
+            double s1 = ((org.python.types.Int) this.second.__int__()).value;
+            double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
+            double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
+            double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
 
-			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
-			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
-			double value1, value2;
-			for(int i = 0; i < 7; i++){
-				value1 = values[i];
-				value2 = values2[i];
-				if(value1 > value2){
-					return org.python.types.Bool.TRUE;
-				}
-				else{return org.python.types.Bool.FALSE;}
-			}
+            double[] values = {y1, m1, d1, h1, min1, s1, ms1};
+            double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
+            double value1, value2;
+            for (int i = 0; i < 7; i++) {
+                value1 = values[i];
+                value2 = values2[i];
+                if (value1 > value2) {
+                    return org.python.types.Bool.TRUE;
+                } else {
+                    return org.python.types.Bool.FALSE;
+                }
+            }
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
 
-	@org.python.Method(__doc__ = "Return self>=value.")
+    @org.python.Method(__doc__ = "Return self>=value.")
     public org.python.Object __ge__(org.python.Object other) {
-       if (other instanceof DateTime) {
-           double y1 = ((org.python.types.Int) this.year.__int__()).value;
-           double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
-           double m1 = ((org.python.types.Int) this.month.__int__()).value;
-           double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
-           double d1 = ((org.python.types.Int) this.day.__int__()).value;
-           double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
-           double h1 = ((org.python.types.Int) this.hour.__int__()).value;
-           double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
-           double min1 = ((org.python.types.Int) this.minute.__int__()).value;
-           double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
-           double s1 = ((org.python.types.Int) this.second.__int__()).value;
-           double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
-           double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
-           double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
+        if (other instanceof DateTime) {
+            double y1 = ((org.python.types.Int) this.year.__int__()).value;
+            double y2 = ((org.python.types.Int) ((DateTime) other).year.__int__()).value;
+            double m1 = ((org.python.types.Int) this.month.__int__()).value;
+            double m2 = ((org.python.types.Int) ((DateTime) other).month.__int__()).value;
+            double d1 = ((org.python.types.Int) this.day.__int__()).value;
+            double d2 = ((org.python.types.Int) ((DateTime) other).day.__int__()).value;
+            double h1 = ((org.python.types.Int) this.hour.__int__()).value;
+            double h2 = ((org.python.types.Int) ((DateTime) other).hour.__int__()).value;
+            double min1 = ((org.python.types.Int) this.minute.__int__()).value;
+            double min2 = ((org.python.types.Int) ((DateTime) other).minute.__int__()).value;
+            double s1 = ((org.python.types.Int) this.second.__int__()).value;
+            double s2 = ((org.python.types.Int) ((DateTime) other).second.__int__()).value;
+            double ms1 = ((org.python.types.Int) this.microsecond.__int__()).value;
+            double ms2 = ((org.python.types.Int) ((DateTime) other).microsecond.__int__()).value;
 
-			double[] values = {y1, m1, d1, h1, min1, s1, ms1};
-			double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
-			double value1, value2;
-			for(int i = 0; i < 7; i++){
-				value1 = values[i];
-				value2 = values2[i];
-				if(value1 > value2){
-					return org.python.types.Bool.TRUE;
-				}
-				else if(value1 == value2){continue;}
-				else{return org.python.types.Bool.FALSE;}
-			}
-			return org.python.types.Bool.TRUE;
+            double[] values = {y1, m1, d1, h1, min1, s1, ms1};
+            double[] values2 = {y2, m2, d2, h2, min2, s2, ms2};
+            double value1, value2;
+            for (int i = 0; i < 7; i++) {
+                value1 = values[i];
+                value2 = values2[i];
+                if (value1 > value2) {
+                    return org.python.types.Bool.TRUE;
+                } else if (value1 == value2) {
+                    continue;
+                } else {
+                    return org.python.types.Bool.FALSE;
+                }
+            }
+            return org.python.types.Bool.TRUE;
         }
         return org.python.types.NotImplementedType.NOT_IMPLEMENTED;
     }
@@ -416,33 +418,47 @@ public class DateTime extends org.python.types.Object {
     @org.python.Method(__doc__ = "")
     public org.python.Object replace(org.python.Object year, org.python.Object month, org.python.Object day, org.python.Object hour, org.python.Object minute, org.python.Object second, org.python.Object microsecond) {
         org.python.Object y, m, d, h, min, s, ms;
-        if (year != null)
+        if (year != null) {
             y = year;
-        else y = this.year.__int__();
+        } else {
+            y = this.year.__int__();
+        }
 
-        if (month != null)
+        if (month != null) {
             m = month;
-        else m = this.month.__int__();
+        } else {
+            m = this.month.__int__();
+        }
 
-        if (day != null)
+        if (day != null) {
             d = day;
-        else d = this.day.__int__();
+        } else {
+            d = this.day.__int__();
+        }
 
-        if (hour != null)
+        if (hour != null) {
             h = hour;
-        else h = this.hour.__int__();
+        } else {
+            h = this.hour.__int__();
+        }
 
-        if (minute != null)
+        if (minute != null) {
             min = minute;
-        else min = this.minute.__int__();
+        } else {
+            min = this.minute.__int__();
+        }
 
-        if (second != null)
+        if (second != null) {
             s = second;
-        else s = this.second.__int__();
+        } else {
+            s = this.second.__int__();
+        }
 
-        if (microsecond != null)
+        if (microsecond != null) {
             ms = microsecond;
-        else ms = this.microsecond.__int__();
+        } else {
+            ms = this.microsecond.__int__();
+        }
 
         org.python.Object[] args = {y, m, d, h, min, s, m};
         return new DateTime(args, Collections.emptyMap());

@@ -284,28 +284,34 @@ public class Date extends org.python.types.Object {
 
         return new Date(dateObj, Collections.emptyMap());
     }
+
     @org.python.Method(__doc__ = "Checks if dates are equal")
     public org.python.types.Object eq(Date date) {
         return org.python.types.Bool.getBool(this.compare(date) == org.python.types.Int.getInt((0)));
     }
 
+    @org.python.Method(__doc__ = "Checks if dates are equal")
+    public org.python.types.Object neq(Date date) {
+        return org.python.types.Bool.getBool(this.compare(date) != org.python.types.Int.getInt((0)));
+    }
+
     @org.python.Method(__doc__ = "Checks if this date is greater than another date")
-    public org.python.types.Object greaterthan(Date date) {
+    public org.python.types.Object gt(Date date) {
         return org.python.types.Bool.getBool(this.compare(date) == org.python.types.Int.getInt((1)));
     }
 
     @org.python.Method(__doc__ = "Checks if this date is less than another date")
-    public org.python.types.Object lessthan(Date date) {
+    public org.python.types.Object lt(Date date) {
         return org.python.types.Bool.getBool(this.compare(date) == org.python.types.Int.getInt((-1)));
     }
 
     @org.python.Method(__doc__ = "Checks if this date is greater or equal than another date")
-    public org.python.types.Object greateroreq(Date date) {
+    public org.python.types.Object ge(Date date) {
         return org.python.types.Bool.getBool(this.compare(date).value >= org.python.types.Int.getInt((0)).value);
     }
 
     @org.python.Method(__doc__ = "Checks if this date is less than or equal than another date")
-    public org.python.types.Object lessthanOrEq(Date date) {
+    public org.python.types.Object le(Date date) {
         return org.python.types.Bool.getBool(this.compare(date).value <= org.python.types.Int.getInt((0)).value);
 
     }

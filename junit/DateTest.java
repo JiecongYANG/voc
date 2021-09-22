@@ -102,10 +102,11 @@ public class DateTest {
         };
         Date date = new Date(args, Collections.EMPTY_MAP);
         assertTrue(date.eq(date).toBoolean());
-        assertFalse(date.greaterthan(date).toBoolean());
-        assertFalse(date.lessthan(date).toBoolean());
-        assertTrue(date.greateroreq(date).toBoolean());
-        assertTrue(date.lessthanOrEq(date).toBoolean());
+        assertFalse(date.neq(date).toBoolean());
+        assertFalse(date.gt(date).toBoolean());
+        assertFalse(date.lt(date).toBoolean());
+        assertTrue(date.ge(date).toBoolean());
+        assertTrue(date.le(date).toBoolean());
 
         org.python.Object[] args1 = {
             Int.getInt(2021),
@@ -115,10 +116,11 @@ public class DateTest {
         Date date1 = new Date(args1, Collections.EMPTY_MAP);
 
         assertFalse(date.eq(date1).toBoolean());
-        assertFalse(date.greaterthan(date1).toBoolean());
-        assertTrue(date.lessthan(date1).toBoolean());
-        assertFalse(date.greateroreq(date1).toBoolean());
-        assertTrue(date.lessthanOrEq(date1).toBoolean());
+        assertTrue(date.neq(date1).toBoolean());
+        assertFalse(date.gt(date1).toBoolean());
+        assertTrue(date.lt(date1).toBoolean());
+        assertFalse(date.ge(date1).toBoolean());
+        assertTrue(date.le(date1).toBoolean());
 
     }
 

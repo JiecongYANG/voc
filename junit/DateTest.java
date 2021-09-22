@@ -101,12 +101,12 @@ public class DateTest {
             Int.getInt(21),
         };
         Date date = new Date(args, Collections.EMPTY_MAP);
-        assertTrue(date.eq(date).toBoolean());
-        assertFalse(date.neq(date).toBoolean());
-        assertFalse(date.gt(date).toBoolean());
-        assertFalse(date.lt(date).toBoolean());
-        assertTrue(date.ge(date).toBoolean());
-        assertTrue(date.le(date).toBoolean());
+        assertTrue(date.__eq__(date).toBoolean());
+        assertFalse(date.__neq__(date).toBoolean());
+        assertFalse(date.__gt__(date).toBoolean());
+        assertFalse(date.__lt__(date).toBoolean());
+        assertTrue(date.__ge__(date).toBoolean());
+        assertTrue(date.__le__(date).toBoolean());
 
         org.python.Object[] args1 = {
             Int.getInt(2021),
@@ -115,12 +115,12 @@ public class DateTest {
         };
         Date date1 = new Date(args1, Collections.EMPTY_MAP);
 
-        assertFalse(date.eq(date1).toBoolean());
-        assertTrue(date.neq(date1).toBoolean());
-        assertFalse(date.gt(date1).toBoolean());
-        assertTrue(date.lt(date1).toBoolean());
-        assertFalse(date.ge(date1).toBoolean());
-        assertTrue(date.le(date1).toBoolean());
+        assertFalse(date.__eq__(date1).toBoolean());
+        assertTrue(date.__neq__(date1).toBoolean());
+        assertFalse(date.__gt__(date1).toBoolean());
+        assertTrue(date.__lt__(date1).toBoolean());
+        assertFalse(date.__ge__(date1).toBoolean());
+        assertTrue(date.__le__(date1).toBoolean());
 
     }
 

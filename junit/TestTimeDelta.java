@@ -10,8 +10,7 @@ import org.python.stdlib.datetime.*;
 
 import java.util.Collections;
 
-public class test_timedelta {
-
+public class TestTimeDelta {
     org.python.types.Int days0 = org.python.types.Int.getInt(100);
     org.python.types.Int seconds0 = org.python.types.Int.getInt(2);
     org.python.types.Int microseconds0 = org.python.types.Int.getInt(3);
@@ -32,7 +31,6 @@ public class test_timedelta {
     org.python.types.Int hours2 = org.python.types.Int.getInt(11);
     org.python.types.Int weeks2 = org.python.types.Int.getInt(12496);
     
-
     HashMap<String, org.python.Object> hm = new HashMap<String, org.python.Object>();
 
     @BeforeEach
@@ -40,10 +38,8 @@ public class test_timedelta {
         hm.clear();
     }
 
-    
-
     @Test
-    public void test_TimeDelta_kwargs() {
+    public void testTimeDeltaKwargs() {
         hm.put("milliseconds", milliseconds2);
         hm.put("minutes", minutes2);
         hm.put("hours", hours2);
@@ -53,7 +49,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_args_different_length() {
+    public void testTimeDeltaArgsDifferentLength() {
         org.python.types.Int days0 = org.python.types.Int.getInt(100);
         org.python.types.Int seconds0 = org.python.types.Int.getInt(2);
         org.python.types.Int microseconds0 = org.python.types.Int.getInt(3);
@@ -68,7 +64,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_args_invalid_2() {
+    public void testTimeDeltaArgsInvalid2() {
         try
         {
             hm.put("millisecondsxxx", milliseconds2);
@@ -93,7 +89,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_args_invalid_3() {
+    public void testTimeDeltaArgsInvalid3() {
         try
         {
             hm.put("days", days1);
@@ -133,7 +129,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_args() {
+    public void testTimeDeltaArgs() {
         assertEquals(new org.python.types.Str("100"), timedelta0.__days__());
         assertEquals(new org.python.types.Str("2"), timedelta0.__seconds__());
         assertEquals(new org.python.types.Str("3"), timedelta0.__microseconds__());
@@ -141,8 +137,9 @@ public class test_timedelta {
         assertEquals(new org.python.types.Str("999999999 days, 23:59:59.999999"), timedelta0.__max__());
         assertEquals(new org.python.types.Str("0:00:00.000001"), timedelta0.__resolution__());
     }
+
     @Test
-    public void test_TimeDelta_total_seconds() {
+    public void testTimeDeltaTotalSeconds() {
         org.python.types.Int days0 = org.python.types.Int.getInt(100);
         org.python.types.Int seconds0 = org.python.types.Int.getInt(2);
         org.python.types.Int microseconds0 = org.python.types.Int.getInt(3);
@@ -183,7 +180,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_eq() {
+    public void testTimeDeltaEq() {
         assertEquals(org.python.types.Bool.TRUE, timedelta0.__eq__(timedelta0));
         assertEquals(org.python.types.Bool.FALSE, timedelta0.__eq__(timedelta1));
 
@@ -191,7 +188,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_neq() {
+    public void testTimeDeltaNeq() {
         assertEquals(org.python.types.Bool.FALSE, timedelta0.__neq__(timedelta0));
         assertEquals(org.python.types.Bool.TRUE, timedelta0.__neq__(timedelta1));
 
@@ -199,7 +196,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_gt() {
+    public void testTimeDeltaGt() {
         assertEquals(org.python.types.Bool.FALSE, timedelta1.__gt__(timedelta1));
         assertEquals(org.python.types.Bool.TRUE, timedelta1.__gt__(timedelta0));
         assertEquals(org.python.types.Bool.FALSE, timedelta0.__gt__(timedelta1));
@@ -208,7 +205,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_lt() {
+    public void testTimeDeltaLt() {
         assertEquals(org.python.types.Bool.FALSE, timedelta1.__lt__(timedelta1));
         assertEquals(org.python.types.Bool.FALSE, timedelta1.__lt__(timedelta0));
         assertEquals(org.python.types.Bool.TRUE, timedelta0.__lt__(timedelta1));
@@ -217,7 +214,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_ge() {
+    public void testTimeDeltaGe() {
         assertEquals(org.python.types.Bool.TRUE, timedelta1.__ge__(timedelta1));
         assertEquals(org.python.types.Bool.TRUE, timedelta1.__ge__(timedelta0));
         assertEquals(org.python.types.Bool.FALSE, timedelta0.__ge__(timedelta1));
@@ -226,7 +223,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_le() {
+    public void testTimeDeltaLe() {
         assertEquals(org.python.types.Bool.TRUE, timedelta1.__le__(timedelta1));
         assertEquals(org.python.types.Bool.FALSE, timedelta1.__le__(timedelta0));
         assertEquals(org.python.types.Bool.TRUE, timedelta0.__le__(timedelta1));
@@ -235,7 +232,7 @@ public class test_timedelta {
     }
     
     @Test
-    public void test_TimeDelta_pos() {
+    public void testTimeDeltaPos() {
         TimeDelta timeDeltaPos = (TimeDelta)timedelta0.__pos__();
 
         assertEquals(timedelta0.__days__(), timeDeltaPos.__days__());
@@ -244,7 +241,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_str() {
+    public void testTimeDeltaStr() {
         org.python.types.Str days = timedelta0.__days__();
         org.python.types.Str seconds = timedelta0.__seconds__();
         org.python.types.Str microseconds = timedelta0.__microseconds__();
@@ -254,7 +251,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_add() {
+    public void testTimeDeltaAdd() {
         TimeDelta timeDeltaSum = (TimeDelta)timedelta0.__add__(timedelta1);
 
         assertEquals(
@@ -273,7 +270,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_sub() {
+    public void testTimeDeltaSub() {
         TimeDelta timeDeltaDifference = (TimeDelta)timedelta1.__sub__(timedelta0);
         assertEquals(
             new org.python.types.Str(Long.toString(days1.value - days0.value)),
@@ -291,7 +288,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_mul_scalarGreaterThan1() {
+    public void testTimeDeltaMulScalarGreaterThan1() {
         org.python.Object scalar = new org.python.types.Float(400000.0);
         TimeDelta timeDeltaProduct = (TimeDelta)timedelta0.__mul__(scalar);
         
@@ -307,7 +304,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_mul_scalarLessThan1() {
+    public void testTimeDeltaMulScalarLessThan1() {
         org.python.Object scalar = new org.python.types.Float(0.2);
         TimeDelta timeDeltaProduct = (TimeDelta)timedelta0.__mul__(scalar);
         
@@ -350,7 +347,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_mul_intScalar() {
+    public void testTimeDeltaMulIntScalar() {
         org.python.Object scalar = org.python.types.Int.getInt(400000);
         TimeDelta timeDeltaProduct = (TimeDelta)timedelta0.__mul__(scalar);
         
@@ -366,7 +363,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_mul_invalidScalar() {
+    public void testTimeDeltaMulInvalidScalar() {
         assertEquals(
             org.python.types.NotImplementedType.NOT_IMPLEMENTED,
             timedelta0.__mul__(new org.python.types.Str("invalid")));
@@ -377,7 +374,7 @@ public class test_timedelta {
     }
 
     @Test
-    public void test_TimeDelta_constant_4() {
+    public void testTimeDeltaConstant4() {
         assertEquals(org.python.types.Int.getInt(4),TimeDelta.constant_4());
     }
 }

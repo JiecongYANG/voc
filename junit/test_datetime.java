@@ -27,6 +27,8 @@ public class test_datetime {
     DateTime datetime2 = new DateTime(args2,  Collections.emptyMap());
 
     HashMap<String, org.python.Object> hm = new HashMap<String, org.python.Object>();
+    org.python.Object[] dt_list = new org.python.Object[100];
+    org.python.types.Int[] int_list = new org.python.types.Int[100];
 
     @BeforeEach
     public void setUp() {
@@ -177,6 +179,21 @@ public class test_datetime {
         org.python.Object comp = datetime2.replace(y, null, null, null, null, null, null);
         assertEquals(new org.python.types.Str("100"), ((DateTime) comp).__year__());
         assertEquals(new org.python.types.Str("2"), ((DateTime) comp).__month__());
+    }
+
+    @Test
+    public void test_DateTime_sort() {
+        for (int i = 1; i<=100; i++){
+            int_list[i-1] = org.python.types.Int.getInt(i);
+        }
+        for (int i = 0; i < 100; i++){
+            org.python.Object[] args = {int_list[99-i], month, day, hour, minute, second, microsecond};
+            dt_list[i] = new DateTime(args,  Collections.emptyMap());
+        }
+        assertEquals(((DateTime)dt_list[0]).__year__(), new org.python.types.Str("100"));
+        dt_list = DateTime.sort(dt_list);
+        assertEquals(((DateTime)dt_list[0]).__year__(), new org.python.types.Str("1"));
+        assertEquals(((DateTime)dt_list[50]).__year__(), new org.python.types.Str("51"));
     }
 
 }

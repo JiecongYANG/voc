@@ -493,4 +493,22 @@ public class DateTime extends org.python.types.Object {
         org.python.Object[] args = {y, m, d, h, min, s, m};
         return new DateTime(args, Collections.emptyMap());
     }
+
+    @org.python.Method(__doc__ = "")
+    public static org.python.Object[] sort(org.python.Object[] datetimes){
+        boolean sorted = false;
+        DateTime tmp;
+        while(!sorted) {
+            sorted = true;
+            for (int i = 0; i < datetimes.length - 1; i++) {
+                if ((org.python.types.Bool) datetimes[i].__gt__(datetimes[i + 1]) == org.python.types.Bool.TRUE) {
+                    tmp = (DateTime) datetimes[i];
+                    datetimes[i] = datetimes[i + 1];
+                    datetimes[i + 1] = tmp;
+                    sorted = false;
+                }
+            }
+        }
+        return datetimes;
+    }
 }

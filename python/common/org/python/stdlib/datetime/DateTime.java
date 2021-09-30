@@ -494,13 +494,13 @@ public class DateTime extends org.python.types.Object {
         return new DateTime(args, Collections.emptyMap());
     }
 
-    @org.python.Method(__doc__ = "")
-    public static org.python.Object[] sort(org.python.Object[] datetimes){
+    @org.python.Method(__doc__ = "returns sorted datetimes")
+    public static org.python.Object[] sort(org.python.Object[] datetimes, int start, int end){
         boolean sorted = false;
         DateTime tmp;
         while(!sorted) {
             sorted = true;
-            for (int i = 0; i < datetimes.length - 1; i++) {
+            for (int i = start; i < end; i++) {
                 if ((org.python.types.Bool) datetimes[i].__gt__(datetimes[i + 1]) == org.python.types.Bool.TRUE) {
                     tmp = (DateTime) datetimes[i];
                     datetimes[i] = datetimes[i + 1];

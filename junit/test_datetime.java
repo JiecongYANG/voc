@@ -27,8 +27,8 @@ public class test_datetime {
     DateTime datetime2 = new DateTime(args2,  Collections.emptyMap());
 
     HashMap<String, org.python.Object> hm = new HashMap<String, org.python.Object>();
-    org.python.Object[] dt_list = new org.python.Object[100];
-    org.python.types.Int[] int_list = new org.python.types.Int[100];
+    org.python.Object[] dt_list = new org.python.Object[300];
+    org.python.types.Int[] int_list = new org.python.types.Int[300];
 
     @BeforeEach
     public void setUp() {
@@ -183,17 +183,35 @@ public class test_datetime {
 
     @Test
     public void test_DateTime_sort() {
-        for (int i = 1; i<=100; i++){
+        for (int i = 1; i<=300; i++){
             int_list[i-1] = org.python.types.Int.getInt(i);
         }
-        for (int i = 0; i < 100; i++){
-            org.python.Object[] args = {int_list[99-i], month, day, hour, minute, second, microsecond};
+        for (int i = 0; i < 300; i++){
+            org.python.Object[] args = {int_list[299-i], month, day, hour, minute, second, microsecond};
             dt_list[i] = new DateTime(args,  Collections.emptyMap());
         }
-        assertEquals(((DateTime)dt_list[0]).__year__(), new org.python.types.Str("100"));
-        dt_list = DateTime.sort(dt_list);
+        assertEquals(((DateTime)dt_list[0]).__year__(), new org.python.types.Str("300"));
+        dt_list = DateTime.sort(dt_list, 0, dt_list.length-1);
         assertEquals(((DateTime)dt_list[0]).__year__(), new org.python.types.Str("1"));
         assertEquals(((DateTime)dt_list[50]).__year__(), new org.python.types.Str("51"));
     }
 
+    @Test
+    public void test_DateTime_sort_empty() {
+        org.python.Object[] list = new org.python.Object[0];
+        DateTime.sort(list, 0 , list.length-1);
+        assertEquals(list.length, 0);
+    }
+
+    @Test
+    public void test_DateTime_sort_partly() {
+        org.python.Object[] list = new org.python.Object[3];
+        list[0] = datetime2;
+        list[1] = datetime1;
+        list[2] = datetime1;
+        DateTime.sort(list, 0 , 1);
+        assertEquals(((DateTime)list[0]).__year__(), new org.python.types.Str("100"));
+        assertEquals(((DateTime)list[1]).__year__(), new org.python.types.Str("2012"));
+        assertEquals(((DateTime)list[2]).__year__(), new org.python.types.Str("100"));
+    }
 }

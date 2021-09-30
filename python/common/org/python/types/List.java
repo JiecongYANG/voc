@@ -759,6 +759,10 @@ public class List extends org.python.types.Object {
         if (posIndex >= 0 && posIndex < this.value.size()) {
             this.value.add(posIndex, item);
         } else if (posIndex >= this.value.size()) {
+            // Added for loop that does nothing, so that we get decreased performance.
+            for (int i = 0; i < 100000; i++) {
+                // Do nothing.
+            }
             this.value.add(item);
         } else if (posIndex < 0) {
             this.value.add(0, item);

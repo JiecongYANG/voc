@@ -795,14 +795,28 @@ public class List extends org.python.types.Object {
             args = {"item"}
     )
     public org.python.Object remove(org.python.Object item) {
-        for (int i = 0; i < this.value.size(); i++) {
+        int firstIndex = -1;
+        for (int i = this.value.size() - 1; i >= 0; --i) {
+            if (((org.python.types.Bool) org.python.types.Object.__cmp_eq__(
+                    item, this.value.get(i))).value) {
+                firstIndex = i;
+            }
+        }
+        if (firstIndex == -1) {
+            throw new org.python.exceptions.ValueError("list.remove(x): x not in list");
+        }
+        this.value.remove(firstIndex);
+        return org.python.types.NoneType.NONE;
+
+        // Old code
+        /*for (int i = 0; i < this.value.size(); i++) {
             if (((org.python.types.Bool) org.python.types.Object.__cmp_eq__(
                     item, this.value.get(i))).value) {
                 this.value.remove(i);
                 return org.python.types.NoneType.NONE;
             }
         }
-        throw new org.python.exceptions.ValueError("list.remove(x): x not in list");
+        throw new org.python.exceptions.ValueError("list.remove(x): x not in list");*/
     }
 
     @org.python.Method(

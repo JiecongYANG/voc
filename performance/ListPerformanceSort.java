@@ -11,13 +11,15 @@ public class ListPerformanceSort {
 
     @Test
     public void testList_sort() {
-        org.python.types.List java_list = py_list_from_java_ints();
-        System.out.println("Insert");
-        for(int i = 0; i < 400000; i++) {
-            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(400000-i));
-        }
-        System.out.println("Sort");
-        java_list.sort(null, null);
 
+        for (int j = 0; j < 8; j++) {
+            org.python.types.List java_list = py_list_from_java_ints();
+            System.out.println("Insert");
+            for (int i = 0; i < 300000; i++) {
+                java_list.append(org.python.types.Int.getInt(300000 - i));
+            }
+            System.out.println("Sort");
+            java_list.sort(null, null);
+        }
     }
 }

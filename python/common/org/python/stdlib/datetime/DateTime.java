@@ -494,20 +494,32 @@ public class DateTime extends org.python.types.Object {
         return new DateTime(args, Collections.emptyMap());
     }
 
-    @org.python.Method(__doc__ = "returns sorted datetimes")
-    public static org.python.Object[] sort(org.python.Object[] datetimes, int start, int end){
-        boolean sorted = false;
-        DateTime tmp;
-        while(!sorted) {
-            sorted = true;
-            for (int i = start; i < end; i++) {
-                if ((org.python.types.Bool) datetimes[i].__gt__(datetimes[i + 1]) == org.python.types.Bool.TRUE) {
-                    tmp = (DateTime) datetimes[i];
-                    datetimes[i] = datetimes[i + 1];
-                    datetimes[i + 1] = tmp;
-                    sorted = false;
-                }
+    @org.python.Method(__doc__ = "")
+    static int partition(org.python.Object[] datetimes, int start, int end) {
+        int pivot = end;
+
+        int counter = start;
+        for (int i = start; i < end; i++) {
+            if (((DateTime)datetimes[i]).__lt__((DateTime)datetimes[pivot]) == org.python.types.Bool.TRUE) {
+                DateTime temp = (DateTime)datetimes[counter];
+                datetimes[counter] = datetimes[i];
+                datetimes[i] = temp;
+                counter++;
             }
+        }
+        DateTime temp = (DateTime)datetimes[pivot];
+        datetimes[pivot] = datetimes[counter];
+        datetimes[counter] = temp;
+
+        return counter;
+    }
+
+    @org.python.Method(__doc__ = "returns sorted datetimes")
+    public static org.python.Object[] sort(org.python.Object[] datetimes, int start, int end) {
+        if (start < end) {
+            int pivot = partition(datetimes, start, end);
+            sort(datetimes, start, pivot-1);
+            sort(datetimes, pivot+1, end);
         }
         return datetimes;
     }

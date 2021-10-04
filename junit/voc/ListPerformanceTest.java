@@ -53,4 +53,22 @@ public class ListPerformanceTest {
         java_list.__setitem__(org.python.types.Int.getInt(100000),org.python.types.Int.getInt(500000));
         System.out.println(java_list.__getitem__(org.python.types.Int.getInt(100000)));
     }
+
+    @Test
+    public void testList_contain() {
+        System.out.println("__contains__");
+
+        for(int i = 0; i < 100000; i++) {
+            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(i));
+        }
+
+        for(int i = 100000; i < 100100; i++) {
+            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(100000));
+        }
+        //System.out.println(java_list);
+        System.out.println(java_list.__contains__(org.python.types.Int.getInt(100000)));
+        //not contain
+        System.out.println(java_list.__contains__(org.python.types.Int.getInt(200000)));
+        System.out.println(java_list.__contains__(org.python.types.Int.getInt(5000)));
+    }
 }

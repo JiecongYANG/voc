@@ -80,9 +80,25 @@ public class ListPerformanceTest {
             java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(i));
         }
 
-        for(int i = 0; i < 100000; i++)
+        for(int i = 0; i < 30000; i++)
         {
             java_list.extend(new org.python.types.Str("abcdefg"));
+        }
+
+        for(int i = 0; i < 30000; i++)
+        {
+            java_list.extend(new org.python.types.Range(org.python.types.Int.getInt(10)));
+        }
+
+        byte[] b={ 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        for(int i = 0; i < 30000; i++)
+        {
+            java_list.extend(new org.python.types.Bytes(b));
+        }
+
+        for(int i = 0; i < 30000; i++)
+        {
+            java_list.extend(new org.python.types.ByteArray(b));
         }
     }
 }

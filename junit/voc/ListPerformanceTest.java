@@ -15,46 +15,6 @@ public class ListPerformanceTest {
     org.python.types.List java_list = py_list_from_java_ints();
 
     @Test
-    public void testList_insert() {
-        System.out.println("Insert");
-        for(int i = 0; i < 100000; i++) {
-            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(i));
-        }
-    }
-
-    @Test
-    public void testList_count() {
-        System.out.println("Count");
-
-        for(int i = 0; i < 100000; i++) {
-            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(i));
-        }
-
-        for(int i = 100000; i < 100100; i++) {
-            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(100000));
-        }
-        //System.out.println(java_list);
-        System.out.println(java_list.count(org.python.types.Int.getInt(100000)));
-    }
-
-    @Test
-    public void testList_getItem_setItem() {
-        System.out.println("__getitem__");
-
-        for(int i = 0; i < 100000; i++) {
-            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(i));
-        }
-
-        for(int i = 100000; i < 100100; i++) {
-            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(100000));
-        }
-        //System.out.println(java_list);
-        System.out.println(java_list.__getitem__(org.python.types.Int.getInt(100000)));
-        java_list.__setitem__(org.python.types.Int.getInt(100000),org.python.types.Int.getInt(500000));
-        System.out.println(java_list.__getitem__(org.python.types.Int.getInt(100000)));
-    }
-
-    @Test
     public void testList_contain() {
         System.out.println("__contains__");
 
@@ -73,8 +33,8 @@ public class ListPerformanceTest {
     }
 
     @Test
-    public void testList_extend() {
-        System.out.println("extend");
+    public void testList_extend_performance() {
+        System.out.println("extend performance");
 
         for(int i = 0; i < 100000; i++) {
             java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(i));
@@ -100,5 +60,23 @@ public class ListPerformanceTest {
         {
             java_list.extend(new org.python.types.ByteArray(b));
         }
+    }
+
+    @Test
+    public void testList_extend_check() {
+        System.out.println("extend check");
+        for(int i = 0; i < 10; i++) {
+            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(i));
+        }
+        System.out.println(java_list);
+        java_list.extend(new org.python.types.Str("abcdefg"));
+        System.out.println(java_list);
+        java_list.extend(new org.python.types.Range(org.python.types.Int.getInt(10)));
+        System.out.println(java_list);
+        byte[] b={ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+        java_list.extend(new org.python.types.Bytes(b));
+        System.out.println(java_list);
+        java_list.extend(new org.python.types.ByteArray(b));
+        System.out.println(java_list);
     }
 }

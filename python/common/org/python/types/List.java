@@ -677,7 +677,7 @@ public class List extends org.python.types.Object {
                 (other instanceof org.python.types.Range) ||
                 (other instanceof org.python.types.Bytes) ||
                 (other instanceof org.python.types.ByteArray)
-                ) {
+        ) {
             int lens = 0;
             if (other instanceof org.python.types.Str) {
                 lens = (int) ((org.python.types.Str) other).__len__().value;

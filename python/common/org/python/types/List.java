@@ -4,7 +4,6 @@ import org.Python;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.concurrent.TimeUnit;
 
 public class List extends org.python.types.Object {
     public java.util.List<org.python.Object> value;
@@ -538,7 +537,7 @@ public class List extends org.python.types.Object {
         return org.python.types.Bool.getBool(found);
         */
         boolean found = false;
-        for (int i = this.value.size() - 1; i >= 0 ; i--) {
+        for (int i = this.value.size() - 1; i >= 0; i--) {
             if (((org.python.types.Bool) org.python.types.Object.__cmp_eq__(
                     item, this.value.get(i))).value) {
                 found = true;
@@ -679,22 +678,20 @@ public class List extends org.python.types.Object {
                 (other instanceof org.python.types.Bytes) ||
                 (other instanceof org.python.types.ByteArray)
                 ) {
-        
             int lens = 0;
             if (other instanceof org.python.types.Str) {
                 lens = (int) ((org.python.types.Str) other).__len__().value;
             } else if (other instanceof org.python.types.Range) {
-                //lens = (int) ((org.python.types.Range) other).__len__().value;
+                lens = (int) ((org.python.types.Int) ((org.python.types.Range) other).__len__()).value;
             } else if (other instanceof org.python.types.Bytes) {
                 lens = (int) ((org.python.types.Bytes) other).__len__().value;
             } else if (other instanceof org.python.types.ByteArray) {
                 lens = (int) ((org.python.types.ByteArray) other).__len__().value;
-            } 
-            for (int i = 0; i < lens; i++){
+            }
+            for (int i = 0; i < lens; i++) {
                 this.value.add(other.__getitem__(org.python.types.Int.getInt(i)));
             }
-        }
-        else if(other instanceof org.python.types.Iterator) {
+        } else if (other instanceof org.python.types.Iterator) {
             org.python.Object iter = null;
             iter = other;
             while (true) {
@@ -704,12 +701,11 @@ public class List extends org.python.types.Object {
                     break;
                 }
             }
-        }
-        else {
+        } else {
             throw new org.python.exceptions.TypeError("'" + other.typeName() + "' object is not iterable");
         }
             //old codes
-            /*        
+            /*
             org.python.Object iter = null;
             if (other instanceof org.python.types.Str) {
                 iter = ((org.python.types.Str) other).__iter__();
@@ -723,16 +719,12 @@ public class List extends org.python.types.Object {
                 iter = other;
             }
             while (true) {
-                
                 try {
                     this.value.add(iter.__next__());
                 } catch (org.python.exceptions.StopIteration si) {
                     break;
                 }
-                
-                
             }
-            
         } else {
             throw new org.python.exceptions.TypeError("'" + other.typeName() + "' object is not iterable");
         }

@@ -71,4 +71,18 @@ public class ListPerformanceTest {
         System.out.println(java_list.__contains__(org.python.types.Int.getInt(200000)));
         System.out.println(java_list.__contains__(org.python.types.Int.getInt(5000)));
     }
+
+    @Test
+    public void testList_extend() {
+        System.out.println("extend");
+
+        for(int i = 0; i < 100000; i++) {
+            java_list.insert(org.python.types.Int.getInt(i), org.python.types.Int.getInt(i));
+        }
+
+        for(int i = 0; i < 1000; i++)
+        {
+            java_list.extend(new org.python.types.Str("abcdefg"));
+        }
+    }
 }

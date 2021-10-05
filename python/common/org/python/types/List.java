@@ -677,21 +677,38 @@ public class List extends org.python.types.Object {
                 (other instanceof org.python.types.Str) ||
                 (other instanceof org.python.types.Range) ||
                 (other instanceof org.python.types.Bytes) ||
-                (other instanceof org.python.types.ByteArray) ||
-                (other instanceof org.python.types.Iterator)) {
+                (other instanceof org.python.types.ByteArray)
+                ) {
         
             int lens = 0;
             if (other instanceof org.python.types.Str) {
-                lens = (int)((org.python.types.Str) other).__len__().value;
-            }
+                lens = (int) ((org.python.types.Str) other).__len__().value;
+            } else if (other instanceof org.python.types.Range) {
+                //lens = (int) ((org.python.types.Range) other).__len__().value;
+            } else if (other instanceof org.python.types.Bytes) {
+                lens = (int) ((org.python.types.Bytes) other).__len__().value;
+            } else if (other instanceof org.python.types.ByteArray) {
+                lens = (int) ((org.python.types.ByteArray) other).__len__().value;
+            } 
             for (int i = 0; i < lens; i++){
                 this.value.add(other.__getitem__(org.python.types.Int.getInt(i)));
+            }
+        }
+        else if(other instanceof org.python.types.Iterator) {
+            org.python.Object iter = null;
+            iter = other;
+            while (true) {
+                try {
+                    this.value.add(iter.__next__());
+                } catch (org.python.exceptions.StopIteration si) {
+                    break;
+                }
             }
         }
         else {
             throw new org.python.exceptions.TypeError("'" + other.typeName() + "' object is not iterable");
         }
-        
+            //old codes
             /*        
             org.python.Object iter = null;
             if (other instanceof org.python.types.Str) {

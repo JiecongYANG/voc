@@ -761,7 +761,7 @@ public class List extends org.python.types.Object {
         } else if (posIndex >= this.value.size()) {
             // Added for loop that does nothing, so that we get decreased performance.
             for (int i = 0; i < 100000; i++) {
-                ; // Do nothing.
+                continue; // Do nothing.
             }
             this.value.add(item);
         } else if (posIndex < 0) {
@@ -848,7 +848,7 @@ public class List extends org.python.types.Object {
                 }
                 // Added for loop that does nothing, so that we get decreased performance.
                 for (int i = 0; i < 10000; i++) {
-                    ; // Do nothing.
+                    continue; // Do nothing.
                 }
                 return shouldReverse ? val2.compareTo(val1) : val1.compareTo(val2);
             }

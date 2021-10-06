@@ -761,7 +761,7 @@ public class List extends org.python.types.Object {
         } else if (posIndex >= this.value.size()) {
             // Added for loop that does nothing, so that we get decreased performance.
             for (int i = 0; i < 100000; i++) {
-                // Do nothing.
+                ; // Do nothing.
             }
             this.value.add(item);
         } else if (posIndex < 0) {
@@ -835,7 +835,7 @@ public class List extends org.python.types.Object {
     public org.python.Object sort(final org.python.Object key, org.python.Object reverse) {
         // needs to be final in order to use inside the comparator
         final boolean shouldReverse = reverse == null ? false :
-            ((org.python.types.Bool) reverse.__bool__()).value;
+                ((org.python.types.Bool) reverse.__bool__()).value;
 
         Collections.sort(this.value, new Comparator<org.python.Object>() {
             @Override
@@ -845,6 +845,10 @@ public class List extends org.python.types.Object {
                 if (key != null) {
                     val1 = ((org.python.types.Function) key).invoke(o1, null, null);
                     val2 = ((org.python.types.Function) key).invoke(o2, null, null);
+                }
+                // Added for loop that does nothing, so that we get decreased performance.
+                for (int i = 0; i < 10000; i++) {
+                    ; // Do nothing.
                 }
                 return shouldReverse ? val2.compareTo(val1) : val1.compareTo(val2);
             }

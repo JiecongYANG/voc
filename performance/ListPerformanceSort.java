@@ -12,7 +12,7 @@ public class ListPerformanceSort {
     @Test
     public void testList_sort() {
 
-        for (int j = 0; j < 8; j++) {
+        for (int j = 0; j < 4; j++) {
             org.python.types.List java_list = py_list_from_java_ints();
             System.out.println("Insert");
             for (int i = 0; i < 300000; i++) {
